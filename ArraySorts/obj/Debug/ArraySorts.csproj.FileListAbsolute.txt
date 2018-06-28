@@ -1,5 +1,0 @@
-c:\users\akim_\source\repos\NET.S.2018.Lyubchenko.01\NET.S.2018.Lyubchenko.01\bin\Debug\NET.S.2018.Lyubchenko.01.dll
-c:\users\akim_\source\repos\NET.S.2018.Lyubchenko.01\NET.S.2018.Lyubchenko.01\bin\Debug\NET.S.2018.Lyubchenko.01.pdb
-c:\users\akim_\source\repos\NET.S.2018.Lyubchenko.01\NET.S.2018.Lyubchenko.01\obj\Debug\ArraySorts.csproj.CoreCompileInputs.cache
-c:\users\akim_\source\repos\NET.S.2018.Lyubchenko.01\NET.S.2018.Lyubchenko.01\obj\Debug\NET.S.2018.Lyubchenko.01.dll
-c:\users\akim_\source\repos\NET.S.2018.Lyubchenko.01\NET.S.2018.Lyubchenko.01\obj\Debug\NET.S.2018.Lyubchenko.01.pdb
