@@ -1,4 +1,0 @@
-C:\Users\Akim_\source\repos\quicksort\QuickSort.Tests\obj\Debug\netstandard2.0\QuickSort.Tests.csprojAssemblyReference.cache
-C:\Users\Akim_\source\repos\quicksort\QuickSort.Tests\obj\Debug\netstandard2.0\QuickSort.Tests.csproj.CoreCompileInputs.cache
-C:\Users\Akim_\source\repos\quicksort\QuickSort.Tests\obj\Debug\netstandard2.0\QuickSort.Tests.AssemblyInfoInputs.cache
-C:\Users\Akim_\source\repos\quicksort\QuickSort.Tests\obj\Debug\netstandard2.0\QuickSort.Tests.AssemblyInfo.cs

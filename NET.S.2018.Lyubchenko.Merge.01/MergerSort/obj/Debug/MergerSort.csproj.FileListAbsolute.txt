@@ -1,6 +1,0 @@
-c:\users\akim_\source\repos\MergerSort\MergerSort\bin\Debug\MergerSort.dll
-c:\users\akim_\source\repos\MergerSort\MergerSort\bin\Debug\MergerSort.pdb
-c:\users\akim_\source\repos\MergerSort\MergerSort\obj\Debug\MergerSort.csprojAssemblyReference.cache
-c:\users\akim_\source\repos\MergerSort\MergerSort\obj\Debug\MergerSort.csproj.CoreCompileInputs.cache
-c:\users\akim_\source\repos\MergerSort\MergerSort\obj\Debug\MergerSort.dll
-c:\users\akim_\source\repos\MergerSort\MergerSort\obj\Debug\MergerSort.pdb
