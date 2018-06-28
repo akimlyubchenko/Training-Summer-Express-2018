@@ -1,0 +1,16 @@
+c:\users\akim_\source\repos\NET.S.2018.Lyubchenko.01\ArraySorts.Tests\obj\Debug\ArraySorts.Tests.csprojAssemblyReference.cache
+c:\users\akim_\source\repos\NET.S.2018.Lyubchenko.01\ArraySorts.Tests\obj\Debug\ArraySorts.Tests.csproj.CoreCompileInputs.cache
+c:\users\akim_\source\repos\NET.S.2018.Lyubchenko.01\ArraySorts.Tests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+c:\users\akim_\source\repos\NET.S.2018.Lyubchenko.01\ArraySorts.Tests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+c:\users\akim_\source\repos\NET.S.2018.Lyubchenko.01\ArraySorts.Tests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+c:\users\akim_\source\repos\NET.S.2018.Lyubchenko.01\ArraySorts.Tests\bin\Debug\ArraySorts.Tests.dll
+c:\users\akim_\source\repos\NET.S.2018.Lyubchenko.01\ArraySorts.Tests\bin\Debug\ArraySorts.Tests.pdb
+c:\users\akim_\source\repos\NET.S.2018.Lyubchenko.01\ArraySorts.Tests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
+c:\users\akim_\source\repos\NET.S.2018.Lyubchenko.01\ArraySorts.Tests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll
+c:\users\akim_\source\repos\NET.S.2018.Lyubchenko.01\ArraySorts.Tests\bin\Debug\NET.S.2018.Lyubchenko.01.dll
+c:\users\akim_\source\repos\NET.S.2018.Lyubchenko.01\ArraySorts.Tests\bin\Debug\NET.S.2018.Lyubchenko.01.pdb
+c:\users\akim_\source\repos\NET.S.2018.Lyubchenko.01\ArraySorts.Tests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.xml
+c:\users\akim_\source\repos\NET.S.2018.Lyubchenko.01\ArraySorts.Tests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
+c:\users\akim_\source\repos\NET.S.2018.Lyubchenko.01\ArraySorts.Tests\obj\Debug\ArraySorts.Tests.csproj.CopyComplete
+c:\users\akim_\source\repos\NET.S.2018.Lyubchenko.01\ArraySorts.Tests\obj\Debug\ArraySorts.Tests.dll
+c:\users\akim_\source\repos\NET.S.2018.Lyubchenko.01\ArraySorts.Tests\obj\Debug\ArraySorts.Tests.pdb
