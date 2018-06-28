@@ -1,0 +1,6 @@
+C:\Users\Akim_\source\repos\NET.S.2018.Lyubchenko.6.02\NET.S.2018.Lyubchenko.6.02\bin\Debug\NET.S.2018.Lyubchenko.6.02.dll
+C:\Users\Akim_\source\repos\NET.S.2018.Lyubchenko.6.02\NET.S.2018.Lyubchenko.6.02\bin\Debug\NET.S.2018.Lyubchenko.6.02.pdb
+C:\Users\Akim_\source\repos\NET.S.2018.Lyubchenko.6.02\NET.S.2018.Lyubchenko.6.02\obj\Debug\NET.S.2018.Lyubchenko.6.02.csprojAssemblyReference.cache
+C:\Users\Akim_\source\repos\NET.S.2018.Lyubchenko.6.02\NET.S.2018.Lyubchenko.6.02\obj\Debug\NET.S.2018.Lyubchenko.6.02.csproj.CoreCompileInputs.cache
+C:\Users\Akim_\source\repos\NET.S.2018.Lyubchenko.6.02\NET.S.2018.Lyubchenko.6.02\obj\Debug\NET.S.2018.Lyubchenko.6.02.dll
+C:\Users\Akim_\source\repos\NET.S.2018.Lyubchenko.6.02\NET.S.2018.Lyubchenko.6.02\obj\Debug\NET.S.2018.Lyubchenko.6.02.pdb
