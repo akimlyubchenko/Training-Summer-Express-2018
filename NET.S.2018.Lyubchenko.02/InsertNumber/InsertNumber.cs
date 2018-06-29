@@ -26,11 +26,11 @@ namespace InsertNumber
             temp &= secondNumber;
 
             // Create place for firstNumber
-            LeftShift(ref temp, i);
+            temp <<= i;
 
             // Create new temp and create place to it
             int temp2 = 1;
-            LeftShift(ref temp2, i);
+            temp2 <<= i;
             temp2 -= 1;
 
             // Copy i-1 numbers from firstNumber
@@ -38,17 +38,6 @@ namespace InsertNumber
 
             // Contain together and return finish number
             return temp | temp2;
-        }
-        #endregion
-        #region 
-        /// <summary>
-        /// Move left binary numbers
-        /// </summary>
-        /// <param name="temp"> Number who need move</param>
-        /// <param name="i"> Value of number moving </param>
-        private static void LeftShift(ref int temp, int i)
-        {
-            temp <<= i;
         }
         #endregion
     }
