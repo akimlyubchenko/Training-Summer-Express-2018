@@ -3,6 +3,7 @@
 // </copyright>
 namespace ArraySort.Tests
 {
+    using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
@@ -61,5 +62,13 @@ namespace ArraySort.Tests
             // Assert
             CollectionAssert.AreEqual(expected, actual);
         }
+
+        /// <summary>
+        /// Checker for null array
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void FilterDigit_NullInsteadArray_ThrowArgumentNullException()
+                => ArraySort.FilterDigit(null, 0);
     }
 }

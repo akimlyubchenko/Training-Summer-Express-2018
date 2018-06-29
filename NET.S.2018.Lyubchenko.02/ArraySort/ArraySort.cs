@@ -1,6 +1,8 @@
 ﻿// <copyright file = "ArraySort.cs" company = "EPAM">
 // Array Sort
 // </copyright>
+using System;
+
 namespace ArraySort
 {
     /// <summary>
@@ -16,6 +18,11 @@ namespace ArraySort
         /// <returns> Output array </returns>
         public static int[] FilterDigit(int[] arr, int value)
         {
+            if (arr == null)
+            {
+                throw new ArgumentNullException(nameof(arr));
+            }
+
             int[] newarr = new int[arr.Length];
             int count = 0;
             {
