@@ -15,6 +15,32 @@ namespace ArraySorts.Tests
     {
         #region QuickSortTests definition
         /// <summary>
+        /// Very big array(stop working around 100M and 200M elements of array)
+        /// </summary>
+        [TestMethod]
+        public void QuickSort_BigArray_SortedArray()
+        {
+            Random rand = new Random();
+
+            // Arr
+            int[] array = new int[100000001];
+            int[] expected = new int[100000001];
+            for (int i = 0; i < expected.Length - 1; i++)
+            {
+                expected[i] = rand.Next(1000000);
+            }
+
+            // Act
+            ArraySorts.Quicksort(ref array, 0, array.Length - 1);
+
+            // Assert
+            if (!ArraySorts.IsSort(array))
+            {
+                Assert.Fail();
+            }
+        }
+
+        /// <summary>
         /// Checks if arrays are equal
         /// </summary>
         [TestMethod]
@@ -25,36 +51,43 @@ namespace ArraySorts.Tests
             int[] expectedarr = new int[6] { 1, 3, 4, 5, 6, 8 };
 
             // Act
-            int[] actualarr = new int[6];
-            actualarr = ArraySorts.Quicksort(intarr, 0, intarr.Length - 1);
+            ArraySorts.Quicksort(ref intarr, 0, intarr.Length - 1);
 
             // Assert
-            CollectionAssert.AreEqual(expectedarr, actualarr);
+            CollectionAssert.AreEqual(expectedarr, intarr);
         }
 
         /// <summary>
-        /// Checks if array are null
+        /// Test emptyArray
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void QuickSort_EmptyArray_Exception()
+        {
+            int[] array = new int[] { };
+            ArraySorts.Quicksort(ref array, 1, 2);
+        }
+
+        /// <summary>
+        /// One element
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Quicksort_OneNumberOfArray_ThisNumber()
+        {
+            int[] array = new int[] { };
+            ArraySorts.Quicksort(ref array, 1, 2);
+        }
+
+        /// <summary>
+        /// Null array
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void Quicksort_nullInsteadArray_ThrowArgumentNullException()
-                => ArraySorts.Quicksort(null, 0, 1);
-
-        /// <summary>
-        /// Checks if array are equal 1
-        /// </summary>
-        [TestMethod]
-        public void Quicksort_OneNumberOfArray_ThisNumber()
+        public void QuickSort_NullArrayException()
         {
-            // Arr
-            int[] arr = new int[1] { 5 };
-            int[] expectedarr = new int[1] { 5 };
-
-            // Act
-            int[] actualarr = ArraySorts.Quicksort(arr, 0, arr.Length - 1);
-
-            // Assert
-            CollectionAssert.AreEqual(expectedarr, actualarr);
+            int[] array = null;
+            ArraySorts.Quicksort(ref array, 1, 2);
         }
         #endregion
         #region MergeSortTests definition
@@ -62,46 +95,79 @@ namespace ArraySorts.Tests
         /// Checks if arrays are equal
         /// </summary>
         [TestMethod]
-    public void MergeSort_unsortedarray136254_sortedarray123456()
-    {
-        // Arrange Act Assert (AAA) Pattern
+        public void MergeSort_unsortedarray136254_sortedarray123456()
+        {
+            // Arrange Act Assert (AAA) Pattern
 
-        // Arrange
-        int[] intarr = new int[6] { 1, 6, 3, 8, 5, 4 };
-        int[] expectedarr = new int[6] { 1, 3, 4, 5, 6, 8 };
+            // Arrange
+            int[] intarr = new int[6] { 1, 6, 3, 8, 5, 4 };
+            int[] expectedarr = new int[6] { 1, 3, 4, 5, 6, 8 };
 
-        // Act
-        int[] actualarr = new int[6];
-        actualarr = ArraySorts.MergeSort(intarr, 0, intarr.Length - 1);
+            // Act
+            ArraySorts.MergeSort(ref intarr, 0, intarr.Length - 1);
 
-        // Assert
-        CollectionAssert.AreEqual(expectedarr, actualarr);
-    }
+            // Assert
+            CollectionAssert.AreEqual(expectedarr, intarr);
+        }
 
-    /// <summary>
-    /// Checks if array are null
-    /// </summary>
-    [TestMethod]
-    [ExpectedException(typeof(ArgumentNullException))]
-    public void MergeSort_nullInsteadArray_ThrowArgumentNullException()
-            => ArraySorts.MergeSort(null, 0, 1);
+        /// <summary>
+        /// Test emptyArray
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void MergeSort_EmptyArray_Exception()
+        {
+            int[] array = new int[] { };
+            ArraySorts.MergeSort(ref array, 1, 2);
+        }
 
-    /// <summary>
-    /// Checks if array are equal 1
-    /// </summary>
-    [TestMethod]
-    public void MergeSort_OneNumberOfArray_ThisNumber()
-    {
-        // Arr
-        int[] arr = new int[1] { 5 };
-        int[] expectedarr = new int[1] { 5 };
+        /// <summary>
+        /// One element
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void MergeSort_OneNumberOfArray_ThisNumber()
+        {
+            int[] array = new int[] { };
+            ArraySorts.MergeSort(ref array, 1, 2);
+        }
 
-        // Act
-        int[] actualarr = ArraySorts.MergeSort(arr, 0, arr.Length - 1);
+        /// <summary>
+        /// Null array
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void MergeSort_NullArrayException()
+        {
+            int[] array = null;
+            ArraySorts.MergeSort(ref array, 1, 2);
+        }
 
-        // Assert
-        CollectionAssert.AreEqual(expectedarr, actualarr);
-    }
+        /// <summary>
+        /// Very big array(stop working around 100M and 200M elements of array)
+        /// </summary>
+        [TestMethod]
+        public void MergeSort_BigArray_SortedArray()
+        {
+            Random rand = new Random();
+
+            // Arr
+            int[] array = new int[100000001];
+            int[] expected = new int[100000001];
+            for (int i = 0; i < expected.Length - 1; i++)
+            {
+                expected[i] = rand.Next(1000000);
+            }
+
+            // Act
+            ArraySorts.MergeSort(ref array, 0, array.Length - 1);
+
+            // Assert
+            if (!ArraySorts.IsSort(array))
+            {
+                Assert.Fail();
+            }
+        }
         #endregion
     }
 }

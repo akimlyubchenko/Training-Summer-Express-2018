@@ -22,41 +22,23 @@ namespace ArraySorts
         /// <param name="start"> Input start index </param>
         /// <param name="end"> Input last index </param>
         /// <returns> The right array </returns>
-        public static int[] Quicksort(int[] array, int start, int end)
+        public static void Quicksort(ref int[] array, int start, int end)
         {
-            if (array == null)
-            {
-                throw new ArgumentNullException(nameof(array));
-            }
+            IsValid(array, start, end);
 
             if (start < end)
             {
                 int pivot = Partition(array, start, end);
                 if (pivot > 1)
                 {
-                    Quicksort(array, start, pivot - 1);
+                    Quicksort(ref array, start, pivot - 1);
                 }
 
                 if (pivot + 1 < end)
                 {
-                    Quicksort(array, pivot + 1, end);
+                    Quicksort(ref array, pivot + 1, end);
                 }
             }
-
-            return array;
-        }
-
-        /// <summary>
-        /// Swap 2 integer elements
-        /// </summary>
-        /// <param name="one"> It's first element </param>
-        /// <param name="two"> It's second element </param>
-        public static void Swap(ref int one, ref int two)
-        {
-            int temp;
-            temp = one;
-            one = two;
-            two = temp;
         }
 
         /// <summary>
@@ -91,22 +73,17 @@ namespace ArraySorts
         /// <param name="leftIndex"> Input first element</param>
         /// <param name="rightIndex"> Input last element </param>
         /// <returns> Complete array </returns>
-        public static int[] MergeSort(int[] unsortedArray, int leftIndex, int rightIndex)
+        public static void MergeSort(ref int[] unsortedArray, int leftIndex, int rightIndex)
         {
-            if (unsortedArray == null)
-            {
-                throw new ArgumentNullException(nameof(unsortedArray));
-            }
+            IsValid(unsortedArray, leftIndex, rightIndex);
 
             if (leftIndex < rightIndex)
             {
                 int middleIndex = (leftIndex + rightIndex) / 2;
-                MergeSort(unsortedArray, leftIndex, middleIndex);
-                MergeSort(unsortedArray, middleIndex + 1, rightIndex);
-                Merge(unsortedArray, leftIndex, middleIndex, rightIndex);
+                MergeSort(ref unsortedArray, leftIndex, middleIndex);
+                MergeSort(ref unsortedArray, middleIndex + 1, rightIndex);
+                Merge(ref unsortedArray, leftIndex, middleIndex, rightIndex);
             }
-
-            return unsortedArray;
         }
 
         /// <summary>
@@ -116,7 +93,7 @@ namespace ArraySorts
         /// <param name="leftIndex"> Input first element</param>
         /// <param name="middleIndex"> Input middle index </param>
         /// <param name="rightIndex"> Input last element </param>
-        private static void Merge(int[] unsortedArray, int leftIndex, int middleIndex, int rightIndex)
+        private static void Merge(ref int[] unsortedArray, int leftIndex, int middleIndex, int rightIndex)
         {
             int lengthLeft = middleIndex - leftIndex + 1;
             int lengthRight = rightIndex - middleIndex;
@@ -152,5 +129,54 @@ namespace ArraySorts
             }
         }
         #endregion
+        /// <summary>
+        /// Checked if array sort
+        /// </summary>
+        /// <param name="array"> Array </param>
+        /// <returns> True if sort, false if not </returns>
+        public static bool IsSort(int[] array)
+        {
+            for (int i = 0; i < array.Length - 2; i++)
+            {
+                if (array[i] > array[i + 1])
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Swap 2 integer elements
+        /// </summary>
+        /// <param name="one"> It's first element </param>
+        /// <param name="two"> It's second element </param>
+        private static void Swap(ref int one, ref int two)
+        {
+            int temp;
+            temp = one;
+            one = two;
+            two = temp;
+        }
+
+        /// <summary>
+        /// Validator
+        /// </summary>
+        /// <param name="array"> Input array </param>
+        /// <param name="leftIndex"> Left index </param>
+        /// <param name="rightIndex"> Right index </param>
+        private static void IsValid(int[] array, int leftIndex = 0, int rightIndex = 1)
+        {
+            if (array == null)
+            {
+                throw new ArgumentNullException(nameof(array));
+            }
+
+            if (array.Length == 0 || array.Length == 1)
+            {
+                throw new ArgumentException(nameof(array));
+            }
+        }
     }
 }
