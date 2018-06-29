@@ -10,6 +10,7 @@ namespace ArraySort
     /// </summary>
     public class ArraySort
     {
+        #region FilterDigit definition
         /// <summary>
         /// Searcher value in array
         /// </summary>
@@ -58,5 +59,6 @@ namespace ArraySort
                 return finisharr;
             }
         }
+        #endregion
     }
 }

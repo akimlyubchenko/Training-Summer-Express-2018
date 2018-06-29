@@ -12,6 +12,7 @@ namespace ArraySort.Tests
     [TestClass]
     public class ArraySortTests
     {
+        #region Checker arrays
         /// <summary>
         /// Checker arrays
         /// </summary>
@@ -28,7 +29,8 @@ namespace ArraySort.Tests
             // Assert
             CollectionAssert.AreEqual(expected, actual);
         }
-
+        #endregion
+        #region Checker arrays width value == 0
         /// <summary>
         /// Checker arrays width value == 0
         /// </summary>
@@ -45,7 +47,8 @@ namespace ArraySort.Tests
             // Assert
             CollectionAssert.AreEqual(expected, actual);
         }
-
+        #endregion
+        #region Checker negative numbers
         /// <summary>
         /// Checker negative numbers
         /// </summary>
@@ -62,7 +65,8 @@ namespace ArraySort.Tests
             // Assert
             CollectionAssert.AreEqual(expected, actual);
         }
-
+        #endregion
+        #region Checker for null array
         /// <summary>
         /// Checker for null array
         /// </summary>
@@ -70,5 +74,6 @@ namespace ArraySort.Tests
         [ExpectedException(typeof(ArgumentNullException))]
         public void FilterDigit_NullInsteadArray_ThrowArgumentNullException()
                 => ArraySort.FilterDigit(null, 0);
+        #endregion
     }
 }
