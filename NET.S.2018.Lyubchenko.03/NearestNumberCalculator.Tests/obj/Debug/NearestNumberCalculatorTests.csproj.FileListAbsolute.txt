@@ -1,0 +1,16 @@
+C:\Users\Akim_\source\repos\RootCalculator\NearestNumberCalculatorTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\Users\Akim_\source\repos\RootCalculator\NearestNumberCalculatorTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\Users\Akim_\source\repos\RootCalculator\NearestNumberCalculatorTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+C:\Users\Akim_\source\repos\RootCalculator\NearestNumberCalculatorTests\bin\Debug\NearestNumberCalculatorTests.dll
+C:\Users\Akim_\source\repos\RootCalculator\NearestNumberCalculatorTests\bin\Debug\NearestNumberCalculatorTests.pdb
+C:\Users\Akim_\source\repos\RootCalculator\NearestNumberCalculatorTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
+C:\Users\Akim_\source\repos\RootCalculator\NearestNumberCalculatorTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll
+C:\Users\Akim_\source\repos\RootCalculator\NearestNumberCalculatorTests\bin\Debug\NearestNumberCalculator.dll
+C:\Users\Akim_\source\repos\RootCalculator\NearestNumberCalculatorTests\bin\Debug\NearestNumberCalculator.pdb
+C:\Users\Akim_\source\repos\RootCalculator\NearestNumberCalculatorTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.xml
+C:\Users\Akim_\source\repos\RootCalculator\NearestNumberCalculatorTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
+C:\Users\Akim_\source\repos\RootCalculator\NearestNumberCalculatorTests\obj\Debug\NearestNumberCalculatorTests.csprojAssemblyReference.cache
+C:\Users\Akim_\source\repos\RootCalculator\NearestNumberCalculatorTests\obj\Debug\NearestNumberCalculatorTests.csproj.CoreCompileInputs.cache
+C:\Users\Akim_\source\repos\RootCalculator\NearestNumberCalculatorTests\obj\Debug\NearestNumberCalculatorTests.csproj.CopyComplete
+C:\Users\Akim_\source\repos\RootCalculator\NearestNumberCalculatorTests\obj\Debug\NearestNumberCalculatorTests.dll
+C:\Users\Akim_\source\repos\RootCalculator\NearestNumberCalculatorTests\obj\Debug\NearestNumberCalculatorTests.pdb

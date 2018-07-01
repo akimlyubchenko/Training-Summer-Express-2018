@@ -1,0 +1,6 @@
+C:\Users\Akim_\source\repos\RootCalculator\NearestNumberCalculator\bin\Debug\NearestNumberCalculator.dll
+C:\Users\Akim_\source\repos\RootCalculator\NearestNumberCalculator\bin\Debug\NearestNumberCalculator.pdb
+C:\Users\Akim_\source\repos\RootCalculator\NearestNumberCalculator\obj\Debug\NearestNumberCalculator.csprojAssemblyReference.cache
+C:\Users\Akim_\source\repos\RootCalculator\NearestNumberCalculator\obj\Debug\NearestNumberCalculator.csproj.CoreCompileInputs.cache
+C:\Users\Akim_\source\repos\RootCalculator\NearestNumberCalculator\obj\Debug\NearestNumberCalculator.dll
+C:\Users\Akim_\source\repos\RootCalculator\NearestNumberCalculator\obj\Debug\NearestNumberCalculator.pdb
