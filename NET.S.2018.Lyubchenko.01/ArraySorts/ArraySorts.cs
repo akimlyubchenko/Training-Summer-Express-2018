@@ -16,27 +16,37 @@ namespace ArraySorts
     {
         #region QuickSort definition
         /// <summary>
+        /// Run QuickSort method or give exception if the parameters are incorrect
+        /// </summary>
+        /// <param name="array"> Input array </param>
+        /// <param name="start"> Input start index </param>
+        /// <param name="end"> Input last index </param>
+        public static void QuickSortRunner(int[] array, int start, int end)
+        {
+            IsValid(array, start, end);
+            Quicksort(array, start, end);
+        }
+
+        /// <summary>
         /// Accepts an array for further processing
         /// </summary>
         /// <param name="array"> Input array </param>
         /// <param name="start"> Input start index </param>
         /// <param name="end"> Input last index </param>
         /// <returns> The right array </returns>
-        public static void Quicksort(ref int[] array, int start, int end)
+        private static void Quicksort(int[] array, int start, int end)
         {
-            IsValid(array, start, end);
-
             if (start < end)
             {
                 int pivot = Partition(array, start, end);
                 if (pivot > 1)
                 {
-                    Quicksort(ref array, start, pivot - 1);
+                    Quicksort(array, start, pivot - 1);
                 }
 
                 if (pivot + 1 < end)
                 {
-                    Quicksort(ref array, pivot + 1, end);
+                    Quicksort(array, pivot + 1, end);
                 }
             }
         }
@@ -67,22 +77,32 @@ namespace ArraySorts
 
         #region MergeSort definition
         /// <summary>
+        /// Run MergeSort method or give exception if the parameters are incorrect
+        /// </summary>
+        /// <param name="unsortedArray"> Input array </param>
+        /// <param name="leftIndex"> Input first element</param>
+        /// <param name="rightIndex"> Input last element </param>
+        public static void MergeSortRunner(int[] unsortedArray, int leftIndex, int rightIndex)
+        {
+            IsValid(unsortedArray, leftIndex, rightIndex);
+            MergeSort(unsortedArray, leftIndex, rightIndex);
+        }
+
+        /// <summary>
         /// Merge sort method
         /// </summary>
         /// <param name="unsortedArray"> Input array </param>
         /// <param name="leftIndex"> Input first element</param>
         /// <param name="rightIndex"> Input last element </param>
         /// <returns> Complete array </returns>
-        public static void MergeSort(ref int[] unsortedArray, int leftIndex, int rightIndex)
+        private static void MergeSort(int[] unsortedArray, int leftIndex, int rightIndex)
         {
-            IsValid(unsortedArray, leftIndex, rightIndex);
-
             if (leftIndex < rightIndex)
             {
                 int middleIndex = (leftIndex + rightIndex) / 2;
-                MergeSort(ref unsortedArray, leftIndex, middleIndex);
-                MergeSort(ref unsortedArray, middleIndex + 1, rightIndex);
-                Merge(ref unsortedArray, leftIndex, middleIndex, rightIndex);
+                MergeSort(unsortedArray, leftIndex, middleIndex);
+                MergeSort(unsortedArray, middleIndex + 1, rightIndex);
+                Merge(unsortedArray, leftIndex, middleIndex, rightIndex);
             }
         }
 
@@ -93,7 +113,7 @@ namespace ArraySorts
         /// <param name="leftIndex"> Input first element</param>
         /// <param name="middleIndex"> Input middle index </param>
         /// <param name="rightIndex"> Input last element </param>
-        private static void Merge(ref int[] unsortedArray, int leftIndex, int middleIndex, int rightIndex)
+        private static void Merge(int[] unsortedArray, int leftIndex, int middleIndex, int rightIndex)
         {
             int lengthLeft = middleIndex - leftIndex + 1;
             int lengthRight = rightIndex - middleIndex;
@@ -130,7 +150,7 @@ namespace ArraySorts
         }
         #endregion
         /// <summary>
-        /// Checked if array sort
+        /// Checks whether the array is sorted
         /// </summary>
         /// <param name="array"> Array </param>
         /// <returns> True if sort, false if not </returns>
@@ -161,7 +181,7 @@ namespace ArraySorts
         }
 
         /// <summary>
-        /// Validator
+        /// Checks if array == null or if array.Length == 0 or array.Length == 1
         /// </summary>
         /// <param name="array"> Input array </param>
         /// <param name="leftIndex"> Left index </param>
@@ -176,6 +196,11 @@ namespace ArraySorts
             if (array.Length == 0 || array.Length == 1)
             {
                 throw new ArgumentException(nameof(array));
+            }
+
+            if (leftIndex >= rightIndex)
+            {
+                throw new ArgumentException($"Start index must be greater than end index");
             }
         }
     }
