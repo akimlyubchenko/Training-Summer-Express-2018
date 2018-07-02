@@ -132,4 +132,30 @@ namespace ArraySort
         }
     }
     #endregion
+
+    public static bool IsTrueArray(int[] array, int digit)
+    {
+        int newArray = array;
+        int counter = 0;
+        for (int i = 0; i < array.Length; i++)
+        {
+            while (newArray[i] != 0)
+            {
+                if (newArray[i] % 10 == digit)
+                {
+                    counter++;
+                    break;
+                }
+
+                newArray /= 10;
+            }
+        }
+
+        if (array.Length - 1 == counter)
+        {
+            return true;
+        }
+
+        return false;
+    }
 }

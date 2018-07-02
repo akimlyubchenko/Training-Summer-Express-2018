@@ -105,5 +105,51 @@ namespace ArraySort.Tests
             // Assert
             CollectionAssert.AreEqual(expected, actual);
         }
+
+        [TestMethod]
+        public void NumberFinderByString_BigArray_ArrayContainOnlyNumbersWidthDigit()
+        {
+            Random rand = new Random();
+
+            // Arr
+            int[] array = new int[100000];
+            int digit = 6;
+            for (int i = 0; i < expected.Length - 1; i++)
+            {
+                array[i] = rand.Next(100);
+            }
+
+            // Act
+            ArraySort.FilterDigit(array, 0, digit, true);
+
+            // Assert
+            if (!ArraySort.IsTrueArray(array))
+            {
+                Assert.Fail();
+            }
+        }
+
+        [TestMethod]
+        public void FilterDigit_BigArray_ArrayContainOnlyNumbersWidthDigit()
+        {
+            Random rand = new Random();
+
+            // Arr
+            int[] array = new int[100000];
+            int digit = 6;
+            for (int i = 0; i < expected.Length - 1; i++)
+            {
+                array[i] = rand.Next(100);
+            }
+
+            // Act
+            ArraySort.FilterDigit(array, 0, digit, false);
+
+            // Assert
+            if (!ArraySort.IsTrueArray(array))
+            {
+                Assert.Fail();
+            }
+        }
     }
 }
