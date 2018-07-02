@@ -63,16 +63,18 @@ namespace NearestNumberCalculator
         {
             if (start < end)
             {
-                int pivot = Partition(array, start, end);
-                if (pivot > 1)
-                {
-                    Quicksort(ref array, start, pivot - 1);
-                }
+                throw new ArgumentException($"Index start {start} must be less than end {end}");
+            }
 
-                if (pivot + 1 < end)
-                {
-                    Quicksort(ref array, pivot + 1, end);
-                }
+            int pivot = Partition(array, start, end);
+            if (pivot > 1)
+            {
+                Quicksort(ref array, start, pivot - 1);
+            }
+
+            if (pivot + 1 < end)
+            {
+                Quicksort(ref array, pivot + 1, end);
             }
         }
 
