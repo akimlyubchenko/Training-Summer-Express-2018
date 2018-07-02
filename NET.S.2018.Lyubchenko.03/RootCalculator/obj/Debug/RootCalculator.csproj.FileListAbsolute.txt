@@ -1,6 +1,0 @@
-C:\Users\Akim_\source\repos\RootCalculator\RootCalculator\bin\Debug\RootCalculator.dll
-C:\Users\Akim_\source\repos\RootCalculator\RootCalculator\bin\Debug\RootCalculator.pdb
-C:\Users\Akim_\source\repos\RootCalculator\RootCalculator\obj\Debug\RootCalculator.csprojAssemblyReference.cache
-C:\Users\Akim_\source\repos\RootCalculator\RootCalculator\obj\Debug\RootCalculator.csproj.CoreCompileInputs.cache
-C:\Users\Akim_\source\repos\RootCalculator\RootCalculator\obj\Debug\RootCalculator.dll
-C:\Users\Akim_\source\repos\RootCalculator\RootCalculator\obj\Debug\RootCalculator.pdb
