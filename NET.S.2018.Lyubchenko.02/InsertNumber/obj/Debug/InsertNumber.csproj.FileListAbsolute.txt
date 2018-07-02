@@ -1,6 +1,0 @@
-C:\Users\Akim_\source\repos\NET.S.2018.Lyubchenko.6.02\InsertNumber\obj\Debug\InsertNumber.csprojAssemblyReference.cache
-C:\Users\Akim_\source\repos\NET.S.2018.Lyubchenko.6.02\InsertNumber\obj\Debug\InsertNumber.csproj.CoreCompileInputs.cache
-C:\Users\Akim_\source\repos\NET.S.2018.Lyubchenko.6.02\InsertNumber\bin\Debug\InsertNumber.dll
-C:\Users\Akim_\source\repos\NET.S.2018.Lyubchenko.6.02\InsertNumber\bin\Debug\InsertNumber.pdb
-C:\Users\Akim_\source\repos\NET.S.2018.Lyubchenko.6.02\InsertNumber\obj\Debug\InsertNumber.dll
-C:\Users\Akim_\source\repos\NET.S.2018.Lyubchenko.6.02\InsertNumber\obj\Debug\InsertNumber.pdb

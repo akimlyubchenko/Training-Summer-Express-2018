@@ -20,7 +20,7 @@ namespace ArraySort.Tests
         public void FilterDigit_InputArray1217157_Return177()
         {
             // Arr
-            int[] arr = { 12, 17, 10, 7 };
+            int[] arr = { 12, 17, 0, 7 };
             int[] expected = { 17, 7 };
 
             // Arc
@@ -75,5 +75,35 @@ namespace ArraySort.Tests
         public void FilterDigit_NullInsteadArray_ThrowArgumentNullException()
                 => ArraySort.FilterDigit(null, 0);
         #endregion
+
+        [TestMethod]
+        public void NumberFinderByString_171017_177()
+        {
+            // Arr
+            int[] array = new int[] { 17, 10, 1, 7 };
+            int digit = 7;
+            int[] expected = new int[] { 17, 7 };
+
+            // Act
+            int[] actual = ArraySort.FilterDigit(array, digit, true);
+
+            // Assert
+            CollectionAssert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void NumberFinderByString_123456101636_61636()
+        {
+            // Arr
+            int[] array = new int[] { 1, 2, 3, 4, 5, 6, 10, 16, 36 };
+            int digit = 6;
+            int[] expected = new int[] { 6, 16, 36 };
+
+            // Act
+            int[] actual = ArraySort.FilterDigit(array, digit, true);
+
+            // Assert
+            CollectionAssert.AreEqual(expected, actual);
+        }
     }
 }

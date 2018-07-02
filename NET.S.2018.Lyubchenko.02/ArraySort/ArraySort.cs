@@ -16,37 +16,66 @@ namespace ArraySort
         /// </summary>
         /// <param name="inputArray"> Input array </param>
         /// <param name="findValue"> Searcher value </param>
+        /// <param name="choose"> choose string or int method </param>
         /// <returns> Output array </returns>
-        public static int[] FilterDigit(int[] inputArray, int findValue)
+        public static int[] FilterDigit(int[] inputArray, int findValue, bool choose = false)
         {
-            ExceptionsCkecker(inputArray, findValue);
-
-            int[] newarr = new int[inputArray.Length];
+            IsValid(inputArray, findValue);
             int count = 0;
-            for (int i = 0; i < inputArray.Length; i++)
+            int[] newArray = new int[inputArray.Length];
+            if (choose == false)
             {
-                if (findValue == 0 && inputArray[i] == 0)
+                for (int i = 0; i < inputArray.Length; i++)
                 {
-                    newarr[count] = inputArray[i];
-                    count++;
-                    i++;
-                }
+                    if (findValue == 0 && inputArray[i] == 0)
+                    {
+                        newArray[count] = inputArray[i];
+                        count++;
+                        i++;
+                    }
 
-                if (NumberFinder(inputArray[i], findValue))
+                    if (NumberFinder(inputArray[i], findValue))
+                    {
+                        newArray[count] = inputArray[i];
+                        count++;
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i < inputArray.Length; i++)
                 {
-                    newarr[count] = inputArray[i];
-                    count++;
+                    if (NumberFinderByString(inputArray[i], findValue))
+                    {
+                        newArray[count] = inputArray[i];
+                        count++;
+                    }
                 }
             }
 
-            int[] finisharr = new int[count];
-            for (int i = 0; i < finisharr.Length; i++)
+            int[] finishArray = new int[count];
+            for (int i = 0; i < finishArray.Length; i++)
             {
-                finisharr[i] = newarr[i];
+                finishArray[i] = newArray[i];
             }
 
-            return finisharr;
+            return finishArray;
         }
+
+        /// <summary>
+        /// Suitable numbers finder(string method)
+        /// </summary>
+        /// <param name="number"> number of inputArray </param>
+        /// <param name="findValue"> What may be contain array </param>
+        /// <returns> True if contain </returns>
+        public static bool NumberFinderByString(int number, int findValue)
+        {
+            string value = number.ToString();
+            string digit = findValue.ToString();
+            bool answer = value.Contains(digit);
+            return answer;
+        }
+
         /// <summary>
         /// Suitable numbers finder
         /// </summary>
@@ -69,12 +98,22 @@ namespace ArraySort
             return false;
         }
 
+
         /// <summary>
         /// The set of Exceptions
         /// </summary>
         /// <param name="number"> It's element of array</param>
         /// <param name="findValue"> It's required number </param>
-        private static void ExceptionsCkecker(int[] inputArray, int findValue)
+        /// <exception cref="ArgumentException">
+        /// If array length == 0
+        /// </exception>
+        /// <exception cref="ArgumentNullException">
+        /// If array l== null
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// If the value is greater than 9 or less than 0
+        /// </exception>
+        private static void IsValid(int[] inputArray, int findValue)
         {
             if (inputArray == null)
             {
