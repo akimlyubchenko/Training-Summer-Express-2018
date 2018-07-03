@@ -17,35 +17,17 @@ namespace RootCalculator
         /// <returns> Finished number </returns>
         public static double FindNthRoot(double number, double degree, double precision = 0.0000001)
         {
-            Exceptions(number, degree, precision);
-            double x0 = number / degree;
-            double x = Equation(number, degree, x0);
+            IsValid(number, degree, precision);
+            double firstValue = number / degree;
+            double lastValue = Equation(number, degree, firstValue);
 
-            while (Math.Abs(x - x0) > precision)
+            while (Math.Abs(lastValue - firstValue) > precision)
             {
-                x0 = x;
-                x = Equation(number, degree, x0);
+                firstValue = lastValue;
+                lastValue = Equation(number, degree, firstValue);
             }
 
-            return x;
-        }
-        #endregion
-        #region Raises to the power of number
-        /// <summary>
-        /// Raises to the power of number
-        /// </summary>
-        /// <param name="number"> Using number </param>
-        /// <param name="pow"> Value of a power</param>
-        /// <returns> Finished number</returns>
-        private static double Pow(double number, int pow)
-        {
-            double resultExponentiation = 1;
-            for (int i = 0; i < pow; i++)
-            {
-                resultExponentiation *= number;
-            }
-
-            return resultExponentiation;
+            return lastValue;
         }
         #endregion
         #region Large formula
@@ -54,25 +36,23 @@ namespace RootCalculator
         /// </summary>
         /// <param name="number"> Number </param>
         /// <param name="degree"> Degree </param>
-        /// <param name="x0"> Last x </param>
+        /// <param name="firstValue"> Last value </param>
         /// <returns> Result of the formula </returns>
-        private static double Equation(double number, double degree, double x0)
-        {
-            double x = (1 / degree) * (((degree - 1) * x0) + (number / Pow(x0, (int)degree - 1)));
-            return x;
-        }
+        private static double Equation(double number, int degree, double firstValue)
+            => (1.0 / degree) * (((degree - 1) * firstValue) + (number / Math.Pow(firstValue, degree - 1)));
+
         #endregion
-        #region The set of exceptions
+        #region The set of IsValid
         /// <summary>
-        /// The set of exceptions
+        /// The set of IsValid
         /// </summary>
         /// <param name="number"> Number </param>
         /// <param name="degree"> Degree </param>
         /// <param name="precision"> Precision </param>
         /// <exception cref="ArgumentException"> 
-        /// 3 types exceptions 
+        /// 3 types IsValid 
         /// </exception>
-        private static void Exceptions(double number, double degree, double precision)
+        private static void IsValid(double number, double degree, double precision)
         {
             if (number < 0 && degree % 2 == 0)
             {
@@ -84,7 +64,7 @@ namespace RootCalculator
                 throw new ArgumentException($"Degree {degree} isn't valid");
             }
 
-            if (precision < 0)
+            if (precision < 0 || precision >= 1)
             {
                 throw new ArgumentException($"Precision {precision} isn't valid");
             }
