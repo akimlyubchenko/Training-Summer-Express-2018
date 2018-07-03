@@ -11,7 +11,7 @@ namespace NearestNumberCalculator
     /// </summary>
     public class NearestNumberCalculator
     {
-        #region Finder next bigger number
+        #region public API
         /// <summary>
         /// Finder next bigger number
         /// </summary>
@@ -28,12 +28,19 @@ namespace NearestNumberCalculator
                 number /= 10;
             }
 
+            return ProcessingArray(array, number);
+        }
+        #endregion
+
+        #region private API
+        private static int ProcessingArray(int[] array, int number)
+        {
             for (int i = array.Length - 1; i > 0; i--)
             {
                 if (array[i - 1] < array[i])
                 {
                     Swap(ref array[i - 1], ref array[i]);
-                    Quicksort(ref array, i, array.Length - 1);
+                    Quicksort(array, i, array.Length - 1);
                     for (int j = 0; j < array.Length; j++)
                     {
                         number += array[j];
@@ -49,9 +56,7 @@ namespace NearestNumberCalculator
 
             return -1;
         }
-        #endregion
 
-        #region QuickSort definition
         /// <summary>
         /// Accepts an array for further processing
         /// </summary>
@@ -59,22 +64,20 @@ namespace NearestNumberCalculator
         /// <param name="start"> Input start index </param>
         /// <param name="end"> Input last index </param>
         /// <returns> The right array </returns>
-        public static void Quicksort(ref int[] array, int start, int end)
+        private static void Quicksort(int[] array, int start, int end)
         {
             if (start < end)
             {
-                throw new ArgumentException($"Index start {start} must be less than end {end}");
-            }
+                int pivot = Partition(array, start, end);
+                if (pivot > 1)
+                {
+                    Quicksort(array, start, pivot - 1);
+                }
 
-            int pivot = Partition(array, start, end);
-            if (pivot > 1)
-            {
-                Quicksort(ref array, start, pivot - 1);
-            }
-
-            if (pivot + 1 < end)
-            {
-                Quicksort(ref array, pivot + 1, end);
+                if (pivot + 1 < end)
+                {
+                    Quicksort(array, pivot + 1, end);
+                }
             }
         }
 
@@ -100,7 +103,6 @@ namespace NearestNumberCalculator
             Swap(ref array[marker], ref array[end]);
             return marker;
         }
-        #endregion
 
         /// <summary>
         /// Swap 2 integer elements
@@ -114,7 +116,7 @@ namespace NearestNumberCalculator
             one = two;
             two = temp;
         }
-        #region If number is valid
+
         /// <summary>
         /// If number is valid
         /// </summary>

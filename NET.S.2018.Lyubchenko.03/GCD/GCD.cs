@@ -8,7 +8,7 @@ namespace GCD
     /// </summary>
     public class GCD
     {
-        #region Euclidean algorithm
+        #region public API
         /// <summary>
         /// Starts the search GCD(Euclidean algorithm)
         /// </summary>
@@ -31,6 +31,51 @@ namespace GCD
         }
 
         /// <summary>
+        /// Starts the search GCD for 2 numbers(Euclidean algorithm)
+        /// </summary>
+        /// <param name="firstNumber"> First number </param>
+        /// <param name="secondNumber"></param>
+        /// <returns></returns>
+        public static int GetGCD(int firstNumber, int secondNumber)
+            => GetGCDTwoNumbers(firstNumber, secondNumber);
+
+        /// <summary>
+        /// Starts the search GCD for 3 numbers(Euclidean algorithm)
+        /// </summary>
+        /// <param name="firstNumber"> First number</param>
+        /// <param name="secondNumber"> Second number</param>
+        /// <param name="thirdNumber"> Thrid number </param>
+        /// <returns></returns>
+        public static int GetGCD(int firstNumber, int secondNumber, int thirdNumber)
+        {
+            int gcd = GetGCDTwoNumbers(firstNumber, secondNumber);
+            gcd = GetGCDTwoNumbers(gcd, thirdNumber);
+            return gcd;
+        }
+
+        /// <summary>
+        /// Starts the search GCD(Stein's algorithm)
+        /// </summary>
+        /// <param name="numbers"> Used numbers </param>
+        /// <returns> GCD </returns>
+        public static int GetSteinGCD(params int[] numbers)
+        {
+            IsValid(numbers);
+            int gcd = SteinGCD(numbers[0], numbers[1]);
+            for (int i = 2; i < numbers.Length; i++)
+            {
+                gcd = SteinGCD(gcd, numbers[i]);
+                if (gcd == 1)
+                {
+                    return gcd;
+                }
+            }
+
+            return gcd;
+        }
+        #endregion
+        #region private API
+        /// <summary>
         /// Particular cases and order of numbers
         /// </summary>
         /// <param name="value1"> First number </param>
@@ -38,6 +83,15 @@ namespace GCD
         /// <returns> GCD </returns>
         private static int GetGCDTwoNumbers(int value1, int value2)
         {
+            if (value1 < 0)
+            {
+                value1 *= -1;
+            }
+
+            if (value2 < 0)
+            {
+                value2 *= -1;
+            }
             int answer = -1;
             if (value1 > value2)
             {
@@ -78,28 +132,6 @@ namespace GCD
             {
                 return value1;
             }
-        }
-        #endregion
-        #region Stein's algorithm
-        /// <summary>
-        /// Starts the search GCD(Stein's algorithm)
-        /// </summary>
-        /// <param name="numbers"> Used numbers </param>
-        /// <returns> GCD </returns>
-        public static int GetSteinGCD(params int[] numbers)
-        {
-            IsValid(numbers);
-            int gcd = SteinGCD(numbers[0], numbers[1]);
-            for (int i = 2; i < numbers.Length; i++)
-            {
-                gcd = SteinGCD(gcd, numbers[i]);
-                if (gcd == 1)
-                {
-                    return gcd;
-                }
-            }
-
-            return gcd;
         }
 
         /// <summary>
@@ -149,45 +181,9 @@ namespace GCD
 
             return SteinGCD((value2 - value1) >> 1, value1);
         }
-        #endregion
-        #region Timing
-        /// <summary>
-        /// Time of Euclidean algorithm execution
-        /// </summary>
-        /// <returns> Time </returns>
-        public static string TimingEuclidean()
-        {
-            Stopwatch stopWatch = new Stopwatch();
-            stopWatch.Start();
-            GetGCD(2226, 4256, 44444444, 444444444, 44444444, 666666666, 888888, 666666, 4222, 1246, 846466);
-            stopWatch.Stop();
-            TimeSpan timespan = stopWatch.Elapsed;
-            string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}.{4:00}",
-                timespan.Hours, timespan.Minutes, timespan.Seconds,
-                timespan.Milliseconds ,timespan.Ticks);
-            return elapsedTime;
-        }
 
         /// <summary>
-        /// Time of Stein's algorithm execution
-        /// </summary>
-        /// <returns> Time </returns>
-        public static string TimingStein()
-        {
-            Stopwatch stopWatch = new Stopwatch();
-            stopWatch.Start();
-            GetSteinGCD(15, 33, 9, 345, 345, 335345356, 123123, 5675858, 21324235, 23465);
-            stopWatch.Stop();
-            TimeSpan timespan = stopWatch.Elapsed;
-            string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}.{4:00}",
-                timespan.Hours, timespan.Minutes, timespan.Seconds,
-                timespan.Milliseconds, timespan.Ticks);
-            return elapsedTime;
-        }
-        #endregion
-
-        /// <summary>
-        /// Checked if array is valid(number[i] must be > 0 , numbers.Length !=0 !=1 )
+        /// Checked if array is valid(if number[i] less 0, multiply by -1, numbers.Length !=0 !=1 )
         /// </summary>
         /// <param name="numbers"> Used numbers </param>
         /// <exception cref="ArgumentException">
@@ -199,14 +195,7 @@ namespace GCD
             {
                 throw new ArgumentException($"Enter at least 2 numbers");
             }
-
-            for (int i = 0; i < numbers.Length; i++)
-            {
-                if (numbers[i] < 0)
-                {
-                    throw new ArgumentException($"Value {numbers[i]} mustn't be negative");
-                }
-            }
         }
+        #endregion
     }
 }

@@ -78,10 +78,10 @@ namespace GCD.Tests
         }
 
         [TestMethod]
-        public void GetGCD_345720And250_2345()
+        public void GetGCD_345720AndNegative250_2345()
         {
             // Arr
-            int v1 = 345720, v2 = 2345;
+            int v1 = 345720, v2 = -2345;
             int expected = 335;
 
             // Act
@@ -90,16 +90,6 @@ namespace GCD.Tests
             // Assert
             Assert.AreEqual(expected, actual);
         }
-
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void GetGCD_Negative750And250_Exception()
-            => GCD.GetGCD(-750, 250);
-
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void GetGCD_50AndNegative40_Exception()
-           => GCD.GetGCD(50, -40);
 
         [TestMethod]
         public void GetGCD_6And9And15_3()
@@ -130,10 +120,10 @@ namespace GCD.Tests
         }
 
         [TestMethod]
-        public void GetGCD_64And32And128And30And12And8_2()
+        public void GetGCD_64And32And128AndNegative30And12And8_2()
         {
             // Arr
-            int v1 = 64, v2 = 32, v3 = 128, v4 = 30, v5 = 12, v6 = 8;
+            int v1 = 64, v2 = 32, v3 = 128, v4 = -30, v5 = 12, v6 = 8;
             int expected = 2;
 
             // Act
@@ -142,11 +132,6 @@ namespace GCD.Tests
             // Assert
             Assert.AreEqual(expected, actual);
         }
-
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void GetGCD_64And32And128And30AndNegative12And8_Exception()
-            => GCD.GetGCD(64, 42, 128, 30, -12, 8);
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -272,11 +257,6 @@ namespace GCD.Tests
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void GetSteinGCD_64And32And128And30AndNegative12And8_Exception()
-            => GCD.GetGCD(64, 42, 128, 30, -12, 8);
-
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
         public void GetSteinGCD_5_Exception()
             => GCD.GetGCD(5);
 
@@ -284,18 +264,5 @@ namespace GCD.Tests
         [ExpectedException(typeof(ArgumentException))]
         public void GetSteinGCD_Empty_Exception()
             => GCD.GetGCD();
-
-        [TestMethod]
-        public void TimingEuclidean_Watch()
-        {
-            Debug.Write($"Spent time: {GCD.TimingEuclidean()}");
-        }
-
-        [TestMethod]
-        public void TimingStein_Watch()
-        {
-            Debug.Write($"Spent time: {GCD.TimingStein()}");
-        }
-
     }
 }
