@@ -264,5 +264,17 @@ namespace GCD.Tests
         [ExpectedException(typeof(ArgumentException))]
         public void GetSteinGCD_Empty_Exception()
             => GCD.GetGCD();
+
+        [TestMethod]
+        public void GetGCDWidthTime_1264_2()
+        {
+            int v1 = 12, v2 = 6, v3 = 4;
+            int expected = 2;
+
+            (int actual, TimeSpan time) = GCD.GetGCDWidthTime(v1, v2, v3);
+            Debug.WriteLine($"Time: {time.Seconds}:{time.Ticks}");
+
+            Assert.AreEqual(expected,actual);
+        }
     }
 }

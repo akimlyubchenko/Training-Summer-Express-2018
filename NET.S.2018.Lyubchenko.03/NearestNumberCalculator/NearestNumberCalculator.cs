@@ -18,6 +18,15 @@ namespace NearestNumberCalculator
         /// <param name="number"> The original number </param>
         /// <returns> Final number </returns>
         public static int FindNextBiggerNumber(int number)
+           => ProcessingArray(ArrayAggregate(ref number), number);
+        #endregion
+
+        #region private API
+        /// <summary>
+        /// Fills up array
+        /// <param name="number"> The original number </param>
+        /// </summary>
+        private static int[] ArrayAggregate(ref int number)
         {
             Exception(number);
             int digitCount = (int)Math.Log10(number) + 1;
@@ -27,12 +36,15 @@ namespace NearestNumberCalculator
                 array[array.Length - i - 1] = number % 10;
                 number /= 10;
             }
-
-            return ProcessingArray(array, number);
+            return array;
         }
-        #endregion
 
-        #region private API
+        /// <summary>
+        /// Processing array(array[i - 1] less array[i] searcher)
+        /// </summary>
+        /// <param name="array"> Array of numersls </param>
+        /// <param name="number"> The original number </param>
+        /// <returns></returns>
         private static int ProcessingArray(int[] array, int number)
         {
             for (int i = array.Length - 1; i > 0; i--)

@@ -17,17 +17,24 @@ namespace GCD
         public static int GetGCD(params int[] numbers)
         {
             IsValid(numbers);
-            int gcd = GetGCDTwoNumbers(numbers[0], numbers[1]);
-            for (int i = 2; i < numbers.Length; i++)
-            {
-                gcd = GetGCDTwoNumbers(gcd, numbers[i]);
-                if (gcd == 1)
-                {
-                    return gcd;
-                }
-            }
-
+            int gcd = GCDRunner(numbers);
             return gcd;
+        }
+        
+        /// <summary>
+        /// Starts the search GCD(Euclidean algorithm)
+        /// </summary>
+        /// <param name="numbers"> Used numbers </param>
+        /// <returns> GCD and work time </returns>
+        public static (int, TimeSpan) GetGCDWidthTime(params int[] numbers)
+        {
+            Stopwatch stopTime = Stopwatch.StartNew();
+            stopTime.Start();
+            IsValid(numbers);
+            int gcd = GCDRunner(numbers);
+            stopTime.Stop();
+            TimeSpan resultTime = stopTime.Elapsed;
+            return (gcd, resultTime);
         }
 
         /// <summary>
@@ -75,6 +82,21 @@ namespace GCD
         }
         #endregion
         #region private API
+        private static int GCDRunner(int[] numbers)
+        {
+            int gcd = GetGCDTwoNumbers(numbers[0], numbers[1]);
+            for (int i = 2; i < numbers.Length; i++)
+            {
+                gcd = GetGCDTwoNumbers(gcd, numbers[i]);
+                if (gcd == 1)
+                {
+                    return gcd;
+                }
+            }
+
+            return gcd;
+        }
+
         /// <summary>
         /// Particular cases and order of numbers
         /// </summary>
