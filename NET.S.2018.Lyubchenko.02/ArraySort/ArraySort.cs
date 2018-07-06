@@ -16,15 +16,12 @@ namespace ArraySort
         /// </summary>
         /// <param name="inputArray"> Input array </param>
         /// <param name="findValue"> Searcher value </param>
-        /// <param name="choose"> choose string or int method </param>
         /// <returns> Output array </returns>
-        public static int[] FilterDigit(int[] inputArray, int findValue, bool choose = false)
+        public static int[] FilterDigit(int[] inputArray, int findValue)
         {
             IsValid(inputArray, findValue);
             int count = 0;
             int[] newArray = new int[inputArray.Length];
-            if (choose == false)
-            {
                 for (int i = 0; i < inputArray.Length; i++)
                 {
                     if (findValue == 0 && inputArray[i] == 0)
@@ -40,18 +37,6 @@ namespace ArraySort
                         count++;
                     }
                 }
-            }
-            else
-            {
-                for (int i = 0; i < inputArray.Length; i++)
-                {
-                    if (NumberFinderByString(inputArray[i], findValue))
-                    {
-                        newArray[count] = inputArray[i];
-                        count++;
-                    }
-                }
-            }
 
             int[] finishArray = new int[count];
             for (int i = 0; i < finishArray.Length; i++)
@@ -60,20 +45,6 @@ namespace ArraySort
             }
 
             return finishArray;
-        }
-
-        /// <summary>
-        /// Suitable numbers finder(string method)
-        /// </summary>
-        /// <param name="number"> number of inputArray </param>
-        /// <param name="findValue"> What may be contain array </param>
-        /// <returns> True if contain </returns>
-        public static bool NumberFinderByString(int number, int findValue)
-        {
-            string value = number.ToString();
-            string digit = findValue.ToString();
-            bool answer = value.Contains(digit);
-            return answer;
         }
 
         /// <summary>
@@ -133,29 +104,5 @@ namespace ArraySort
     }
     #endregion
 
-    public static bool IsTrueArray(int[] array, int digit)
-    {
-        int newArray = array;
-        int counter = 0;
-        for (int i = 0; i < array.Length; i++)
-        {
-            while (newArray[i] != 0)
-            {
-                if (newArray[i] % 10 == digit)
-                {
-                    counter++;
-                    break;
-                }
-
-                newArray /= 10;
-            }
-        }
-
-        if (array.Length - 1 == counter)
-        {
-            return true;
-        }
-
-        return false;
-    }
+    
 }

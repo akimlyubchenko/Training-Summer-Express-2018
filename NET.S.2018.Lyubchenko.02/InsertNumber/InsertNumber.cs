@@ -3,6 +3,7 @@
 // </copyright>
 namespace InsertNumber
 {
+    using System;
     /// <summary>
     /// Compute and insert j-i elements in finish number
     /// </summary>
@@ -38,6 +39,14 @@ namespace InsertNumber
 
             // Contain together and return finish number
             return temp | temp2;
+        }
+
+        private static void IsValid()
+        {
+            if (i > j)
+            {
+                throw new ArgumentException($"Enter i > j");
+            }
         }
         #endregion
     }

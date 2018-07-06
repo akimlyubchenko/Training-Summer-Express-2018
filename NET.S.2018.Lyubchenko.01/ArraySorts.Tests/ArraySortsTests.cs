@@ -13,21 +13,21 @@ namespace ArraySorts.Tests
     [TestClass]
     public class ArraySortsTests
     {
-        #region QuickSortRunnerTests definition
+        #region QuickSortTests definition
         /// <summary>
         /// Very big array(stop working around 100M and 200M elements of array)
         /// </summary>
         [TestMethod]
-        public void QuickSortRunner_BigArray_SortedArray()
+        public void QuickSort_BigArray_SortedArray()
         {
             // Arr
             int[] array = new int[100];
 
             // Act
-            ArraySorts.QuickSortRunner(array, 0, array.Length - 1);
+            ArraySorts.QuickSort(array, 0, array.Length - 1);
 
             // Assert
-            if (!ArraySorts.IsSort(array))
+            if (!IsSort(array))
             {
                 Assert.Fail();
             }
@@ -37,14 +37,14 @@ namespace ArraySorts.Tests
         /// Checks if arrays are equal
         /// </summary>
         [TestMethod]
-        public void QuickSortRunner_unsortedarray163854_sortedarray134568()
+        public void QuickSort_unsortedarray163854_sortedarray134568()
         {
             // Arrange
             int[] intarr = new int[6] { 1, 6, 3, 8, 5, 4 };
             int[] expectedarr = new int[6] { 1, 3, 4, 5, 6, 8 };
 
             // Act
-            ArraySorts.QuickSortRunner(intarr, 0, intarr.Length - 1);
+            ArraySorts.QuickSort(intarr, 0, intarr.Length - 1);
 
             // Assert
             CollectionAssert.AreEqual(expectedarr, intarr);
@@ -55,10 +55,10 @@ namespace ArraySorts.Tests
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void QuickSortRunner_EmptyArray_Exception()
+        public void QuickSort_EmptyArray_Exception()
         {
             int[] array = new int[] { };
-            ArraySorts.QuickSortRunner(array, 1, 2);
+            ArraySorts.QuickSort(array, 1, 2);
         }
 
         /// <summary>
@@ -66,10 +66,10 @@ namespace ArraySorts.Tests
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void QuickSortRunner_OneNumberOfArray_ThisNumber()
+        public void QuickSort_OneNumberOfArray_ThisNumber()
         {
             int[] array = new int[] { };
-            ArraySorts.QuickSortRunner(array, 1, 2);
+            ArraySorts.QuickSort(array, 1, 2);
         }
 
         /// <summary>
@@ -77,18 +77,18 @@ namespace ArraySorts.Tests
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void QuickSortRunner_NullArrayException()
+        public void QuickSort_NullArrayException()
         {
             int[] array = null;
-            ArraySorts.QuickSortRunner(array, 1, 2);
+            ArraySorts.QuickSort(array, 1, 2);
         }
         #endregion
-        #region MergeSortRunnerTests definition
+        #region MergeSortTests definition
         /// <summary>
         /// Checks if arrays are equal
         /// </summary>
         [TestMethod]
-        public void MergeSortRunner_unsortedarray136254_sortedarray123456()
+        public void MergeSort_unsortedarray136254_sortedarray123456()
         {
             // Arrange Act Assert (AAA) Pattern
 
@@ -97,7 +97,7 @@ namespace ArraySorts.Tests
             int[] expectedarr = new int[6] { 1, 3, 4, 5, 6, 8 };
 
             // Act
-            ArraySorts.MergeSortRunner(intarr, 0, intarr.Length - 1);
+            ArraySorts.MergeSort(intarr, 0, intarr.Length - 1);
 
             // Assert
             CollectionAssert.AreEqual(expectedarr, intarr);
@@ -108,10 +108,10 @@ namespace ArraySorts.Tests
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void MergeSortRunner_EmptyArray_Exception()
+        public void MergeSort_EmptyArray_Exception()
         {
             int[] array = new int[] { };
-            ArraySorts.MergeSortRunner(array, 1, 2);
+            ArraySorts.MergeSort(array, 1, 2);
         }
 
         /// <summary>
@@ -119,10 +119,10 @@ namespace ArraySorts.Tests
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void MergeSortRunner_OneNumberOfArray_ThisNumber()
+        public void MergeSort_OneNumberOfArray_ThisNumber()
         {
             int[] array = new int[] { };
-            ArraySorts.MergeSortRunner(array, 1, 2);
+            ArraySorts.MergeSort(array, 1, 2);
         }
 
         /// <summary>
@@ -130,17 +130,17 @@ namespace ArraySorts.Tests
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void MergeSortRunner_NullArrayException()
+        public void MergeSort_NullArrayException()
         {
             int[] array = null;
-            ArraySorts.MergeSortRunner(array, 1, 2);
+            ArraySorts.MergeSort(array, 1, 2);
         }
 
         /// <summary>
         /// Very big array(stop working around 100M and 200M elements of array)
         /// </summary>
         [TestMethod]
-        public void MergeSortRunner_BigArray_SortedArray()
+        public void MergeSort_BigArray_SortedArray()
         {
             Random rand = new Random();
 
@@ -153,14 +153,32 @@ namespace ArraySorts.Tests
             }
 
             // Act
-            ArraySorts.MergeSortRunner(array, 0, array.Length - 1);
+            ArraySorts.MergeSort(array, 0, array.Length - 1);
 
             // Assert
-            if (!ArraySorts.IsSort(array))
+            if (!IsSort(array))
             {
                 Assert.Fail();
             }
-        } 
+        }
         #endregion
+
+        /// <summary>
+        /// Checks whether the array is sorted
+        /// </summary>
+        /// <param name="array"> Array </param>
+        /// <returns> True if sort, false if not </returns>
+        private static bool IsSort(int[] array)
+        {
+            for (int i = 0; i < array.Length - 2; i++)
+            {
+                if (array[i] > array[i + 1])
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
     }
 }

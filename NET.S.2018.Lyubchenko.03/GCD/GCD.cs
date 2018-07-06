@@ -17,7 +17,7 @@ namespace GCD
         public static int GetGCD(params int[] numbers)
         {
             IsValid(numbers);
-            int gcd = GCDRunner(numbers);
+            int gcd = GCDSorter(numbers);
             return gcd;
         }
         
@@ -31,7 +31,7 @@ namespace GCD
             Stopwatch stopTime = Stopwatch.StartNew();
             stopTime.Start();
             IsValid(numbers);
-            int gcd = GCDRunner(numbers);
+            int gcd = GCDSorter(numbers);
             stopTime.Stop();
             TimeSpan resultTime = stopTime.Elapsed;
             return (gcd, resultTime);
@@ -42,9 +42,34 @@ namespace GCD
         /// </summary>
         /// <param name="firstNumber"> First number </param>
         /// <param name="secondNumber"></param>
-        /// <returns></returns>
+        /// <returns> GCD </returns>
         public static int GetGCD(int firstNumber, int secondNumber)
-            => GetGCDTwoNumbers(firstNumber, secondNumber);
+        {
+            if (value1 < 0)
+            {
+                value1 *= -1;
+            }
+
+            if (value2 < 0)
+            {
+                value2 *= -1;
+            }
+            int answer = -1;
+            if (value1 > value2)
+            {
+                answer = GCDCalculator(value1, value2);
+            }
+            else if (value2 > value1)
+            {
+                answer = GCDCalculator(value2, value1);
+            }
+            else if (value1 == value2)
+            {
+                answer = value1;
+            }
+
+            return answer;
+        }
 
         /// <summary>
         /// Starts the search GCD for 3 numbers(Euclidean algorithm)
@@ -82,7 +107,7 @@ namespace GCD
         }
         #endregion
         #region private API
-        private static int GCDRunner(int[] numbers)
+        private static int GCDSorter(int[] numbers)
         {
             int gcd = GetGCDTwoNumbers(numbers[0], numbers[1]);
             for (int i = 2; i < numbers.Length; i++)
@@ -95,40 +120,6 @@ namespace GCD
             }
 
             return gcd;
-        }
-
-        /// <summary>
-        /// Particular cases and order of numbers
-        /// </summary>
-        /// <param name="value1"> First number </param>
-        /// <param name="value2"> Second number </param>
-        /// <returns> GCD </returns>
-        private static int GetGCDTwoNumbers(int value1, int value2)
-        {
-            if (value1 < 0)
-            {
-                value1 *= -1;
-            }
-
-            if (value2 < 0)
-            {
-                value2 *= -1;
-            }
-            int answer = -1;
-            if (value1 > value2)
-            {
-                answer = GCDCalculator(value1, value2);
-            }
-            else if (value2 > value1)
-            {
-                answer = GCDCalculator(value2, value1);
-            }
-            else if (value1 == value2)
-            {
-                answer = value1;
-            }
-
-            return answer;
         }
 
         /// <summary>

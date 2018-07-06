@@ -14,19 +14,32 @@ namespace ArraySorts
     /// </summary>
     public class ArraySorts
     {
-        #region QuickSort definition
+        #region public API
         /// <summary>
         /// Run QuickSort method or give exception if the parameters are incorrect
         /// </summary>
         /// <param name="array"> Input array </param>
         /// <param name="start"> Input start index </param>
         /// <param name="end"> Input last index </param>
-        public static void QuickSortRunner(int[] array, int start, int end)
+        public static void QuickSort(int[] array, int start, int end)
         {
             IsValid(array, start, end);
             Quicksort(array, start, end);
         }
 
+        /// <summary>
+        /// Run MergeSort method or give exception if the parameters are incorrect
+        /// </summary>
+        /// <param name="unsortedArray"> Input array </param>
+        /// <param name="leftIndex"> Input first element</param>
+        /// <param name="rightIndex"> Input last element </param>
+        public static void MergeSort(int[] unsortedArray, int leftIndex, int rightIndex)
+        {
+            IsValid(unsortedArray, leftIndex, rightIndex);
+            MergeSort(unsortedArray, leftIndex, rightIndex);
+        }
+        #endregion
+        #region private API
         /// <summary>
         /// Accepts an array for further processing
         /// </summary>
@@ -34,19 +47,19 @@ namespace ArraySorts
         /// <param name="start"> Input start index </param>
         /// <param name="end"> Input last index </param>
         /// <returns> The right array </returns>
-        private static void Quicksort(int[] array, int start, int end)
+        private static void QuicksortRealization(int[] array, int start, int end)
         {
             if (start < end)
             {
                 int pivot = Partition(array, start, end);
                 if (pivot > 1)
                 {
-                    Quicksort(array, start, pivot - 1);
+                    QuicksortRealization(array, start, pivot - 1);
                 }
 
                 if (pivot + 1 < end)
                 {
-                    Quicksort(array, pivot + 1, end);
+                    QuicksortRealization(array, pivot + 1, end);
                 }
             }
         }
@@ -73,21 +86,7 @@ namespace ArraySorts
             Swap(ref array[marker], ref array[end]);
             return marker;
         }
-        #endregion
-
-        #region MergeSort definition
-        /// <summary>
-        /// Run MergeSort method or give exception if the parameters are incorrect
-        /// </summary>
-        /// <param name="unsortedArray"> Input array </param>
-        /// <param name="leftIndex"> Input first element</param>
-        /// <param name="rightIndex"> Input last element </param>
-        public static void MergeSortRunner(int[] unsortedArray, int leftIndex, int rightIndex)
-        {
-            IsValid(unsortedArray, leftIndex, rightIndex);
-            MergeSort(unsortedArray, leftIndex, rightIndex);
-        }
-
+        
         /// <summary>
         /// Merge sort method
         /// </summary>
@@ -95,13 +94,13 @@ namespace ArraySorts
         /// <param name="leftIndex"> Input first element</param>
         /// <param name="rightIndex"> Input last element </param>
         /// <returns> Complete array </returns>
-        private static void MergeSort(int[] unsortedArray, int leftIndex, int rightIndex)
+        private static void MergeSortRealization(int[] unsortedArray, int leftIndex, int rightIndex)
         {
             if (leftIndex < rightIndex)
             {
                 int middleIndex = (leftIndex + rightIndex) / 2;
-                MergeSort(unsortedArray, leftIndex, middleIndex);
-                MergeSort(unsortedArray, middleIndex + 1, rightIndex);
+                MergeSortRealization(unsortedArray, leftIndex, middleIndex);
+                MergeSortRealization(unsortedArray, middleIndex + 1, rightIndex);
                 Merge(unsortedArray, leftIndex, middleIndex, rightIndex);
             }
         }
@@ -148,24 +147,6 @@ namespace ArraySorts
                 }
             }
         }
-        #endregion
-        /// <summary>
-        /// Checks whether the array is sorted
-        /// </summary>
-        /// <param name="array"> Array </param>
-        /// <returns> True if sort, false if not </returns>
-        public static bool IsSort(int[] array)
-        {
-            for (int i = 0; i < array.Length - 2; i++)
-            {
-                if (array[i] > array[i + 1])
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
 
         /// <summary>
         /// Swap 2 integer elements
@@ -180,12 +161,18 @@ namespace ArraySorts
             two = temp;
         }
 
+
         /// <summary>
-        /// Checks if array == null or if array.Length == 0 or array.Length == 1
+        /// Returns true if ... is valid.
         /// </summary>
-        /// <param name="array"> Input array </param>
-        /// <param name="leftIndex"> Left index </param>
-        /// <param name="rightIndex"> Right index </param>
+        /// <param name="array">The array.</param>
+        /// <param name="leftIndex">Index of the left.</param>
+        /// <param name="rightIndex">Index of the right.</param>
+        /// <exception cref="ArgumentNullException"> Array mustn't be null</exception>
+        /// <exception cref="ArgumentException">
+        /// array lenght mustn't be equal 1 or 0
+        /// Start index must be greater than end index
+        /// </exception>
         private static void IsValid(int[] array, int leftIndex = 0, int rightIndex = 1)
         {
             if (array == null)
@@ -203,5 +190,6 @@ namespace ArraySorts
                 throw new ArgumentException($"Start index must be greater than end index");
             }
         }
+        #endregion
     }
 }

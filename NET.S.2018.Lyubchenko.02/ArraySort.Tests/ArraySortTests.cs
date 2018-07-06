@@ -123,7 +123,7 @@ namespace ArraySort.Tests
             ArraySort.FilterDigit(array, 0, digit, true);
 
             // Assert
-            if (!ArraySort.IsTrueArray(array))
+            if (!IsTrueArray(array))
             {
                 Assert.Fail();
             }
@@ -146,10 +146,36 @@ namespace ArraySort.Tests
             ArraySort.FilterDigit(array, 0, digit, false);
 
             // Assert
-            if (!ArraySort.IsTrueArray(array))
+            if (!IsTrueArray(array))
             {
                 Assert.Fail();
             }
+        }
+
+        private static bool IsTrueArray(int[] array, int digit)
+        {
+            int newArray = array;
+            int counter = 0;
+            for (int i = 0; i < array.Length; i++)
+            {
+                while (newArray[i] != 0)
+                {
+                    if (newArray[i] % 10 == digit)
+                    {
+                        counter++;
+                        break;
+                    }
+
+                    newArray /= 10;
+                }
+            }
+
+            if (array.Length - 1 == counter)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }
