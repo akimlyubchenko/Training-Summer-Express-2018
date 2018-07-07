@@ -7,8 +7,16 @@ using System.Threading.Tasks;
 
 namespace Converter
 {
+    /// <summary>
+    /// Convert double numbers to binary
+    /// </summary>
     public static class DoubleToBinary
     {
+        /// <summary>
+        /// Doubles to binary converter
+        /// </summary>
+        /// <param name="number"> The number </param>
+        /// <returns> Number in binaty </returns>
         public static string DoubleToBinaryString(this double number)
         {
             DoubleToLong value = new DoubleToLong { double64bits = number };
@@ -17,6 +25,11 @@ namespace Converter
             return String.Concat(Converter(value));
         }
 
+        /// <summary>
+        /// Fills up array
+        /// </summary>
+        /// <param name="value"> The value </param>
+        /// <returns> Done array binary numbers </returns>
         private static byte[] Converter(DoubleToLong value)
         {
             byte[] doneNumber = new byte[64];
@@ -37,6 +50,9 @@ namespace Converter
             return doneNumber;
         }
 
+        /// <summary>
+        /// Struct for read bytes from double
+        /// </summary>
         [StructLayout(LayoutKind.Explicit)]
         private struct DoubleToLong
         {
