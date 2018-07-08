@@ -7,36 +7,23 @@ using System.Threading.Tasks;
 
 namespace Converter
 {
-    /// <summary>
-    /// Convert double numbers to binary
-    /// </summary>
     public static class DoubleToBinary
     {
-        /// <summary>
-        /// Doubles to binary converter
-        /// </summary>
-        /// <param name="number"> The number </param>
-        /// <returns> Number in binaty </returns>
         public static string DoubleToBinaryString(this double number)
         {
-            DoubleToLong value = new DoubleToLong { double64bits = number };
+            DoubleToLong value = new DoubleToLong { Double64bits = number };
 
             // Можно хоть в строку конвертировать?)
             return String.Concat(Converter(value));
         }
 
-        /// <summary>
-        /// Fills up array
-        /// </summary>
-        /// <param name="value"> The value </param>
-        /// <returns> Done array binary numbers </returns>
         private static byte[] Converter(DoubleToLong value)
         {
             byte[] doneNumber = new byte[64];
             long mask = 1L;
             for (int i = 0; i < 64; i++)
             {
-                if ((value.long64bits & mask) == 0)
+                if ((value.Long64bits & mask) == 0)
                 {
                     doneNumber[doneNumber.Length - 1 - i] = 0;
                 }
@@ -50,18 +37,21 @@ namespace Converter
             return doneNumber;
         }
 
-        /// <summary>
-        /// Struct for read bytes from double
-        /// </summary>
         [StructLayout(LayoutKind.Explicit)]
         private struct DoubleToLong
         {
             [FieldOffset(0)]
-            public readonly long long64bits;
+            private readonly long long64bits;
             [FieldOffset(0)]
-            public double double64bits;
+            private double double64bits;
+
+            public long Long64bits { get { return long64bits; } }
+            public double Double64bits
+            {
+                get { return double64bits; }
+                set { double64bits = value; }
+            }
+
         }
-
-
     }
 }
