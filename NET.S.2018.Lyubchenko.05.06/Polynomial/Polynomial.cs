@@ -1,16 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Polynomial
 {
     /// <summary>
     /// Generate polynomial
     /// </summary>
-    public class Polynomial
+    public class Polynomial : IEquatable<Polynomial>, ICloneable
     {
+        private double[] coefs;
+        public int Degree { get; private set; }
         #region public API        
         /// <summary>
         /// Initializes a new instance of the <see cref="Polynomial"/> class.
@@ -18,56 +17,63 @@ namespace Polynomial
         /// <param name="coefs"> The numbers of equation </param>
         public Polynomial(double[] coefs)
         {
-            IsValid(coefs);
-            Coefs = coefs;
-            Degree = Coefs.Length - 1;
+            Validator(coefs);
+            this.coefs = coefs;
+            Degree = coefs.Length - 1;
         }
-        #endregion        
-        /// <summary>
-        /// Gets or sets the array of numbers.
-        /// </summary>
-        /// <value>
-        /// The array.
-        /// </value>
-        private double[] Coefs { get; set; }
-        /// <summary>
-        /// Gets or sets the degree.
-        /// </summary>
-        /// <value>
-        /// The degree.
-        /// </value>
-        private int Degree { get; set; }
+
+        public double this[int index]
+        {
+            get
+            {
+                if (index < 0 || index > Degree)
+                {
+                    throw new IndexOutOfRangeException($"{nameof(index)} must less as {Degree}");
+                }
+
+                return coefs[index];
+            }
+
+            private set
+            {
+                if (index < 0 || index > Degree)
+                {
+                    throw new IndexOutOfRangeException($"{nameof(index)} must less as {Degree}");
+                }
+
+                coefs[index] = value;
+            }
+        }
+        #endregion
         #region Overrides        
         /// <summary>
         /// Implements the operator +.
         /// </summary>
-        /// <param name="pol1">The pol1.</param>
-        /// <param name="pol2">The pol2.</param>
+        /// <param name="lhs"> First polynom</param>
+        /// <param name="rhs"> Second polynom</param>
         /// <returns>
-        /// Sum pol1 and pol2
+        /// Sum 2 polynoms
         /// </returns>
-        public static Polynomial operator +(Polynomial pol1, Polynomial pol2)
+        public static Polynomial operator +(Polynomial lhs, Polynomial rhs)
         {
-            if (pol1.Degree == pol2.Degree)
+            CheckInput(lhs, rhs);
+            if (lhs.Degree == rhs.Degree)
             {
-                double[] doneCoefs = new double[pol2.Degree + 1];
-                for (int i = 0; i <= pol1.Degree; i++)
+                double[] doneCoefs = new double[rhs.Degree + 1];
+                for (int i = 0; i <= lhs.Degree; i++)
                 {
-                    doneCoefs[i] = pol1.Coefs[i] + pol2.Coefs[i];
+                    doneCoefs[i] = lhs.coefs[i] + rhs.coefs[i];
                 }
 
-                Polynomial donePol = new Polynomial(doneCoefs);
-                return donePol;
+                return new Polynomial(doneCoefs);
             }
-            else if (pol1.Degree > pol2.Degree)
+            else if (lhs.Degree > rhs.Degree)
             {
-                Polynomial donePol = OperatorPlusHelper(pol1, pol2);
-                return donePol;
+                return OperatorPlusHelper(lhs, rhs);
             }
-            else if (pol2.Degree > pol1.Degree)
+            else if (rhs.Degree > lhs.Degree)
             {
-                Polynomial donePol = OperatorPlusHelper(pol2, pol1);
-                return donePol;
+                return OperatorPlusHelper(rhs, lhs);
             }
 
             return null;
@@ -76,104 +82,88 @@ namespace Polynomial
         /// <summary>
         /// Implements the operator -.
         /// </summary>
-        /// <param name="pol1">The pol1.</param>
-        /// <param name="pol2">The pol2.</param>
+        /// <param name="lhs"> First polynom</param>
+        /// <param name="rhs"> Second polynom</param>
         /// <returns>
         /// The result of the operator -.
         /// </returns>
-        public static Polynomial operator -(Polynomial pol1, Polynomial pol2)
+        public static Polynomial operator -(Polynomial lhs, Polynomial rhs)
         {
-            if (pol1.Degree == pol2.Degree)
+            double[] tempCoefs = new double[rhs.coefs.Length];
+            for (int i = 0; i < tempCoefs.Length; i++)
             {
-                double[] doneCoefs = new double[pol2.Degree + 1];
-                for (int i = 0; i <= pol1.Degree; i++)
-                {
-                    doneCoefs[i] = pol1.Coefs[i] - pol2.Coefs[i];
-                }
-
-                Polynomial donePol = new Polynomial(doneCoefs);
-                return donePol;
-            }
-            else if (pol1.Degree > pol2.Degree)
-            {
-                Polynomial donePol = OperatorSubtractionHelper(pol1, pol2);
-                return donePol;
-            }
-            else if (pol2.Degree > pol1.Degree)
-            {
-                Polynomial donePol = OperatorSubtractionHelper(pol2, pol1);
-                return donePol;
+                tempCoefs[i] = rhs.coefs[i] * (-1);
             }
 
-            return null;
+            Polynomial tempPol = new Polynomial(tempCoefs);
+            return lhs + tempPol;
         }
 
         /// <summary>
         /// Implements the operator *.
         /// </summary>
-        /// <param name="pol1">The pol1.</param>
-        /// <param name="pol2">The pol2.</param>
+        /// <param name="lhs"> First polynom</param>
+        /// <param name="rhs"> Second polynom</param>
         /// <returns>
         /// The result of the operator *.
         /// </returns>
-        public static Polynomial operator *(Polynomial pol1, Polynomial pol2)
+        public static Polynomial operator *(Polynomial lhs, Polynomial rhs)
         {
-            double[] doneCoefs = new double[(pol1.Degree * pol2.Degree) + 1];
-            for (int i = 0; i <= pol1.Degree; i++)
+            double[] doneCoefs = new double[(lhs.Degree * rhs.Degree) + 1];
+            for (int i = 0; i <= lhs.Degree; i++)
             {
-                for (int j = 0; j <= pol2.Degree; j++)
+                for (int j = 0; j <= rhs.Degree; j++)
                 {
-                    doneCoefs[i + j] += pol1.Coefs[i] * pol2.Coefs[j];
+                    doneCoefs[i + j] += lhs.coefs[i] * rhs.coefs[j];
                 }
             }
 
-            Polynomial donePol = new Polynomial(doneCoefs);
-            return donePol;
+            return new Polynomial(doneCoefs);
         }
 
         /// <summary>
         /// Implements the operator !=.
         /// </summary>
-        /// <param name="pol1">The pol1.</param>
-        /// <param name="pol2">The pol2.</param>
+        /// <param name="lhs"> First polynom</param>
+        /// <param name="rhs"> Second polynom</param>
         /// <returns>
         /// The result of the operator !=.
         /// </returns>
-        public static bool operator !=(Polynomial pol1, Polynomial pol2)
+        public static bool operator !=(Polynomial lhs, Polynomial rhs)
         {
-            if (pol1.Degree == pol2.Degree)
+            if (lhs == rhs)
             {
-                for (int i = 0; i <= pol1.Degree; i++)
-                {
-                    if (pol1.Coefs[i] != pol2.Coefs[i])
-                    {
-                        return true;
-                    }
-                }
-
                 return false;
             }
-            else
-            {
-                return true;
-            }
+
+            return true;
         }
 
         /// <summary>
         /// Implements the operator ==.
         /// </summary>
-        /// <param name="pol1">The pol1.</param>
-        /// <param name="pol2">The pol2.</param>
+        /// <param name="lhs"> First polynom</param>
+        /// <param name="rhs"> Second polynom</param>
         /// <returns>
         /// The result of the operator ==.
         /// </returns>
-        public static bool operator ==(Polynomial pol1, Polynomial pol2)
+        public static bool operator ==(Polynomial lhs, Polynomial rhs)
         {
-            if (pol1.Degree == pol2.Degree)
+            if ((object)lhs == null)
             {
-                for (int i = 0; i <= pol1.Degree; i++)
+                return false;
+            }
+
+            if ((object)rhs == null)
+            {
+                return false;
+            }
+
+            if (lhs.Degree == rhs.Degree)
+            {
+                for (int i = 0; i <= lhs.Degree; i++)
                 {
-                    if (pol1.Coefs[i] != pol2.Coefs[i])
+                    if (lhs.coefs[i] != rhs.coefs[i])
                     {
                         return false;
                     }
@@ -181,10 +171,8 @@ namespace Polynomial
 
                 return true;
             }
-            else
-            {
-                return false;
-            }
+
+            return false;
         }
 
         /// <summary>
@@ -213,9 +201,9 @@ namespace Polynomial
         /// </returns>
         public override int GetHashCode()
         {
-            if (Coefs != null)
+            if (coefs != null)
             {
-                return Coefs.GetHashCode();
+                return coefs.GetHashCode();
             }
 
             return 0;
@@ -229,83 +217,132 @@ namespace Polynomial
         /// </returns>
         public override string ToString()
         {
-            string polynomyal = $"{Coefs[0]}x^{Degree}";
-            for (int i = 1; i < Degree - 1; i++)
+            StringBuilder polynomyal = new StringBuilder();
+            int i = 0;
+            do
             {
-                if (Coefs[i] != 0.0)
+                if (coefs[i] != 0)
                 {
-                    polynomyal += $" + {Coefs[i]}x^{Degree - i}";
+                    polynomyal.Append($"{coefs[i]}x^{Degree}");
+                    i++;
+                    break;
+                }
+            } while (coefs[i] != 0);
+            for (; i < Degree - 1; i++)
+            {
+                if (coefs[i] != 0.0)
+                {
+                    polynomyal.Append($" + {coefs[i]}x^{Degree - i}");
                 }
             }
 
-            if (Coefs[Degree - 1] != 0.0)
+            if (coefs[Degree - 1] != 0.0)
             {
-                polynomyal += $" + {Coefs[Degree - 1]}x";
+                polynomyal.Append($" + {coefs[Degree - 1]}x");
             }
 
-            if (Coefs[Degree] != 0.0)
+            if (coefs[Degree] != 0.0)
             {
-                polynomyal += $" + {Coefs[Degree]}";
+                polynomyal.Append($" + {coefs[Degree]}");
             }
 
-            polynomyal += " = 0";
-            return polynomyal;
+            polynomyal.Append(" = 0");
+            return polynomyal.ToString();
         }
 
+        #endregion
+        #region Interfases
+        public object Clone()
+        {
+            double[] doneCoefs = new double[Degree + 1];
+            for (int i = 0; i <= Degree; i++)
+            {
+                doneCoefs[i] = coefs[i];
+            }
+
+            return new Polynomial(doneCoefs);
+        }
+
+        public bool Equals(Polynomial other)
+        {
+            if (other.Degree != Degree)
+            {
+                return false;
+            }
+
+            for (int i = 0; i < other.coefs.Length; i++)
+            {
+                if (other.coefs[i] != coefs[i])
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
         #endregion
         #region private API        
         /// <summary>
         /// If degries aren't equale, compute addition
         /// </summary>
-        /// <param name="pol1">The pol1.</param>
-        /// <param name="pol2">The pol2.</param>
+        /// <param name="lhs"> First polynom</param>
+        /// <param name="rhs"> Second polynom</param>
         /// <returns> Done Polynomial </returns>
-        private static Polynomial OperatorPlusHelper(Polynomial pol1, Polynomial pol2)
+        private static Polynomial OperatorPlusHelper(Polynomial lhs, Polynomial rhs)
         {
-            double[] doneCoefs = new double[pol1.Degree + 1];
-            for (int j = 0; j < pol1.Degree - pol2.Degree; j++)
+            double[] doneCoefs = new double[lhs.Degree + 1];
+            for (int j = 0; j < lhs.Degree - rhs.Degree; j++)
             {
-                doneCoefs[j] = pol1.Coefs[j];
+                doneCoefs[j] = lhs.coefs[j];
             }
 
-            for (int i = pol1.Degree - pol2.Degree; i <= pol1.Degree; i++)
+            for (int i = lhs.Degree - rhs.Degree; i <= lhs.Degree; i++)
             {
-                doneCoefs[i] = pol1.Coefs[i] + pol2.Coefs[i - pol1.Degree + pol2.Degree];
+                doneCoefs[i] = lhs.coefs[i] + rhs.coefs[i - lhs.Degree + rhs.Degree];
             }
 
-            Polynomial donePol = new Polynomial(doneCoefs);
-            return donePol;
+            return new Polynomial(doneCoefs);
+        }
+
+        #endregion        
+       
+        /// <summary>
+        /// Checks the input object
+        /// </summary>
+        /// <param name="lhs">The LHS.</param>
+        /// <exception cref="ArgumentNullException"> If obj == null </exception>
+        /// <exception cref="ArgumentException"> If coefs.Lenght == 0 </exception>
+        private static void CheckInput(object obj)
+        {
+            if (obj == null)
+            {
+                throw new ArgumentNullException($"{nameof(obj)} is null!");
+            }
+
+            Polynomial pol = obj as Polynomial;
+            if (pol.coefs.Length == 0)
+            {
+                throw new ArgumentException($"{nameof(obj)} must have any coefficients!");
+            }
         }
 
         /// <summary>
-        /// If degries aren't equale, compute subtraction
+        /// Checks the input objects
         /// </summary>
-        /// <param name="pol1">The pol1.</param>
-        /// <param name="pol2">The pol2.</param>
-        /// <returns> Done Polynomial </returns>
-        private static Polynomial OperatorSubtractionHelper(Polynomial pol1, Polynomial pol2)
+        /// <param name="lhs">The fist obj.</param>
+        /// <param name="rhs">The second obj.</param>
+        private static void CheckInput(object lhs, object rhs)
         {
-            double[] doneCoefs = new double[pol1.Degree + 1];
-            for (int j = 0; j < pol1.Degree - pol2.Degree; j++)
-            {
-                doneCoefs[j] = pol1.Coefs[j];
-            }
-
-            for (int i = pol1.Degree - pol2.Degree; i <= pol1.Degree; i++)
-            {
-                doneCoefs[i] = pol1.Coefs[i] - pol2.Coefs[i - pol1.Degree + pol2.Degree];
-            }
-
-            Polynomial donePol = new Polynomial(doneCoefs);
-            return donePol;
+            CheckInput(lhs);
+            CheckInput(rhs);
         }
-        #endregion        
+
         /// <summary>
         /// Returns true if ... is valid.
         /// </summary>
         /// <param name="coefs"> Array of terms equation </param>
         /// <exception cref="System.ArgumentNullException"> Array of terms equation</exception>
-        private void IsValid(double[] coefs)
+        private void Validator(double[] coefs)
         {
             if (coefs == null || coefs.Length == 0)
             {

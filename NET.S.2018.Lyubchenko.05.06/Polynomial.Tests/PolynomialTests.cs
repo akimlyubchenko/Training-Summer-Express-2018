@@ -19,7 +19,6 @@ namespace Polynomial.Tests
             return pol.ToString();
         }
 
-
         [TestCase(1, 2, 3, ExpectedResult = 55467396)]
 
         [Test]
@@ -40,7 +39,6 @@ namespace Polynomial.Tests
             Polynomial actual = pol1 + pol2;
 
             Assert.True(polex == actual);
-
         }
 
         [TestCase(new double[] { 3, 6, 9 }, new double[] { 1, 2, 3 }, new double[] { 2, 4, 6 })]
@@ -54,7 +52,6 @@ namespace Polynomial.Tests
             Polynomial actual = pol1 - pol2;
 
             Assert.True(polex == actual);
-
         }
 
         [TestCase(new double[] { 3, 6, 9 }, new double[] { 1, 2, 3 }, new double[] { 3, 12, 30, 36, 27 })]
@@ -68,7 +65,28 @@ namespace Polynomial.Tests
             Polynomial actual = pol1 * pol2;
 
             Assert.True(polex == actual);
+        }
 
+        [TestCase(new double[] { 1, 2, 3 }, new double[] { 1, 2, 3 })]
+        public void Equals_DoubleArrays_EqualOrNot(double[] coefs1, double[] coefs2)
+        {
+            Polynomial pol1 = new Polynomial(coefs1);
+            Polynomial pol2 = new Polynomial(coefs2);
+
+            bool actual = pol1 == pol2;
+
+            Assert.True(actual);
+        }
+
+        [TestCase(new double[] { 1, 2, 3.4 }, new double[] { 1, 2, 3 })]
+        public void NotEquals_DoubleArrays_EqualOrNot(double[] coefs1, double[] coefs2)
+        {
+            Polynomial pol1 = new Polynomial(coefs1);
+            Polynomial pol2 = new Polynomial(coefs2);
+
+            bool actual = pol1 != pol2;
+
+            Assert.True(actual);
         }
 
         [Test]
