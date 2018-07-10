@@ -11,32 +11,18 @@ namespace ToDecimal.Tests
     public class ToDecimalTests
     {
         [TestCase("0110111101100001100001010111111", 2, ExpectedResult = 934331071)]
-        public int ToDecimalConverter_0110111101100001100001010111111_2_934331071(string numberString, int notation)
-           => ToDecimal.ToDecimalConverter(numberString, notation);
-
         [TestCase("01101111011001100001010111111", 2, ExpectedResult = 233620159)]
-        public int ToDecimalConverter_01101111011001100001010111111_2_233620159(string numberString, int notation)
-          => ToDecimal.ToDecimalConverter(numberString, notation);
-
         [TestCase("1AeF101", 16, ExpectedResult = 28242177)]
-        public int ToDecimalConverter_1AeF101_16_28242177(string numberString, int notation)
-          => ToDecimal.ToDecimalConverter(numberString, notation);
-
         [TestCase("1ACB67", 16, ExpectedResult = 1756007)]
-        public int ToDecimalConverter_1ACB67_16_1756007(string numberString, int notation)
-          => ToDecimal.ToDecimalConverter(numberString, notation);
-
         [TestCase("764241", 8, ExpectedResult = 256161)]
-        public int ToDecimalConverter_764241_8_256161(string numberString, int notation)
-         => ToDecimal.ToDecimalConverter(numberString, notation);
-
         [TestCase("10", 5, ExpectedResult = 5)]
-        public int ToDecimalConverter_10_5_5(string numberString, int notation)
+        [TestCase("1Aec101", 15, ExpectedResult = 19733851)]
+        public int ToDecimalConverter_SomeNumber_SomeNumberIn10Notation(string numberString, int notation)
          => ToDecimal.ToDecimalConverter(numberString, notation);
 
-        [TestCase("1Aec101", 15, ExpectedResult = 19733851)]
-        public int ToDecimalConverter_1Aec101_15_19733851(string numberString, int notation)
-         => ToDecimal.ToDecimalConverter(numberString, notation);
+        [Test]
+        public void ToDecimalConverter_11111111111111111111111111111111_OverflowException()
+          => Assert.Throws<OverflowException>(() => ToDecimal.ToDecimalConverter("11111111111111111111111111111111", 2));
 
         [Test]
         public void ToDecimalConverter_WithNull_ThrowArgumentNullException()

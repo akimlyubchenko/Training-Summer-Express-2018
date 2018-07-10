@@ -7,6 +7,8 @@ namespace ToDecimal
     /// </summary>
     public static class ToDecimal
     {
+        private const string ALPHABET = "0123456789ABCDEFGHIKLMNOPQRSTVXYZ";
+
         #region public API        
         /// <summary>
         /// Converter number from any notation more 1 and less 17, to decimal number
@@ -17,7 +19,9 @@ namespace ToDecimal
         public static int ToDecimalConverter(string numberString, int notation)
         {
             IsValid(numberString, notation);
-            int[] numbers = StringIntConvert(numberString, notation);
+            numberString = numberString.ToUpper();
+            string usedAlphabet = ALPHABET.Substring(0, notation);
+            int[] numbers = StringIntConvert(numberString, usedAlphabet);
             return DoneNumber(numbers, notation);
         }
         #endregion
@@ -32,10 +36,17 @@ namespace ToDecimal
         private static int DoneNumber(int[] numbers, int notation)
         {
             int number = 0;
+            int power = (int)Math.Pow(notation, numbers.Length - 1);
             for (int i = 0; i < numbers.Length; i++)
             {
-                number += numbers[i] * (int)Math.Pow(notation, numbers.Length - 1 - i);
+                checked
+                {
+                    number += numbers[i] * power;
+                }
+                
+                power /= notation;
             }
+
             return number;
         }
 
@@ -45,11 +56,11 @@ namespace ToDecimal
         /// <param name="numberString"> Elementary string </param>
         /// <param name="notation"> The notation </param>
         /// <returns> Int array </returns>
-        private static int[] StringIntConvert(string numberString, int notation)
+        private static int[] StringIntConvert(string numberString, string usedAlphabet)
         {
-            if (notation > 10)
+            if (usedAlphabet.Length > 10)
             {
-                int[] numbers = StringIntConvertMoreDecimal(numberString);
+                int[] numbers = StringIntConvertMoreDecimal(numberString, usedAlphabet);
                 return numbers;
             }
             else
@@ -69,38 +80,18 @@ namespace ToDecimal
         /// </summary>
         /// <param name="numberString"> Elementary string </param>
         /// <returns> Int array </returns>
-        private static int[] StringIntConvertMoreDecimal(string numberString)
+        private static int[] StringIntConvertMoreDecimal(string numberString, string usedAlphabet)
         {
             int[] numbers = new int[numberString.Length];
             for (int i = 0; i < numbers.Length; i++)
             {
-                if (numberString[i] < 65)
+                if (numberString[i] < 58)
                 {
                     numbers[i] = numberString[i] - 48;
                 }
-                else if (numberString[i] == 65 || numberString[i] == 97)
+                else
                 {
-                    numbers[i] = 10;
-                }
-                else if (numberString[i] == 66 || numberString[i] == 98)
-                {
-                    numbers[i] = 11;
-                }
-                else if (numberString[i] == 67 || numberString[i] == 99)
-                {
-                    numbers[i] = 12;
-                }
-                else if (numberString[i] == 68 || numberString[i] == 100)
-                {
-                    numbers[i] = 13;
-                }
-                else if (numberString[i] == 69 || numberString[i] == 101)
-                {
-                    numbers[i] = 14;
-                }
-                else if (numberString[i] == 70 || numberString[i] == 102)
-                {
-                    numbers[i] = 15;
+                    numbers[i] = usedAlphabet.IndexOf(numberString[i]);
                 }
             }
 
