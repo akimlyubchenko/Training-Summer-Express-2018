@@ -259,3 +259,9 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+/NET.S.2018.Lyubchenko.07.08/Customer/Properties/AssemblyInfo.cs
+/NET.S.2018.Lyubchenko.07.08/Customer/Customer.csproj
+/NET.S.2018.Lyubchenko.07.08/Customer.Tests/Properties
+/NET.S.2018.Lyubchenko.07.08/Customer.Tests/Customer.Tests.csproj
+/NET.S.2018.Lyubchenko.07.08/Customer.Tests/packages.config
+/NET.S.2018.Lyubchenko.07.08/NET.S.2018.Lyubchenko.07.08.sln
