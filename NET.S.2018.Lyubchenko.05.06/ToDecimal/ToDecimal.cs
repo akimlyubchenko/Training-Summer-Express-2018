@@ -18,7 +18,7 @@ namespace ToDecimal
         /// <returns> Integer decimal number</returns>
         public static int ToDecimalConverter(string numberString, int notation)
         {
-            IsValid(numberString, notation);
+            Validator(numberString, notation);
             numberString = numberString.ToUpper();
             string usedAlphabet = ALPHABET.Substring(0, notation);
             int[] numbers = StringIntConvert(numberString, usedAlphabet);
@@ -107,44 +107,38 @@ namespace ToDecimal
         /// Notation or number are invalid
         /// </exception>
         /// <exception cref="ArgumentNullException"> Elementary number isn't valid </exception>
-        private static void IsValid(string numberString, int notation)
+        private static void Validator(string numberString, int notation)
         {
             if (notation < 2 || notation > 16)
             {
-                throw new ArgumentException($"Notation is invalid");
+                throw new ArgumentException($"{nameof(notation)} isn't valid");
             }
 
-            if (numberString == null)
+            if (string.IsNullOrEmpty(numberString))
             {
-                throw new ArgumentNullException(nameof(numberString));
+                throw new ArgumentException($"{nameof(numberString)} must be completed");
             }
 
+            numberString = numberString.ToUpper();
+            string usedAlphabet = ALPHABET.Substring(0, notation);
+            int count = -1;
             for (int i = 0; i < numberString.Length; i++)
             {
-                if (notation < 11)
+                for (int j = 0; j < usedAlphabet.Length; j++)
                 {
-                    if (numberString[i] - 48 < 0 || numberString[i] - 48 > 9)
+                    if (numberString[i] == usedAlphabet[j])
                     {
-                        throw new ArgumentException($"Number is invalid");
+                        count++;
+                        break;
                     }
                 }
-                else
+
+                if (count!=i)
                 {
-                    if (numberString[i] >= 48 && numberString[i] <= 57)
-                    {
-                        continue;
-                    }
-                    else if (numberString[i] >= 65 && numberString[i] <= 70)
-                    {
-                        continue;
-                    }
-                    else if (numberString[i] >= 97 && numberString[i] <= 102)
-                    {
-                        continue;
-                    }
-                    throw new ArgumentException($"Number is invalid");
+                    throw new ArgumentException($"number {numberString[i]} can't contain in the {notation} number system");
                 }
             }
+
         }
         #endregion
     }

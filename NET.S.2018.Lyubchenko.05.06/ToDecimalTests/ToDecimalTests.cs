@@ -26,7 +26,7 @@ namespace ToDecimal.Tests
 
         [Test]
         public void ToDecimalConverter_WithNull_ThrowArgumentNullException()
-           => Assert.Throws<ArgumentNullException>(() => ToDecimal.ToDecimalConverter(null,5));
+           => Assert.Throws<ArgumentException>(() => ToDecimal.ToDecimalConverter(null,5));
 
         [Test]
         public void ToDecimalConverter_NotationLessAsNumber_ThrowArgumentException()
