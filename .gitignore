@@ -270,3 +270,10 @@ __pycache__/
 /NET.S.2018.Lyubchenko.07.08/CustomerFormat.Tests/packages.config
 /NET.S.2018.Lyubchenko.07.08/CustomerFormat.Tests/Properties/AssemblyInfo.cs
 /NET.S.2018.Lyubchenko.07.08/CustomerFormat.Tests
+/NET.S.2018.Lyubchenko.09/BubbleJaggedSort.Tests/Properties/AssemblyInfo.cs
+/NET.S.2018.Lyubchenko.09/BubbleJaggedSort.Tests/BubbleJaggedSort.Tests.csproj
+/NET.S.2018.Lyubchenko.09/BubbleJaggedSort.Tests/packages.config
+/.gitattributes
+/NET.S.2018.Lyubchenko.09/NET.S.2018.Lyubchenko.09.sln
+/NET.S.2018.Lyubchenko.09/BubbleJaggedSort/BubbleJaggedSort.csproj
+/NET.S.2018.Lyubchenko.09/BubbleJaggedSort/Properties/AssemblyInfo.cs
