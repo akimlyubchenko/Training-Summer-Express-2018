@@ -21,33 +21,23 @@ namespace ToDecimal
             Validator(numberString, notation);
             numberString = numberString.ToUpper();
             string usedAlphabet = ALPHABET.Substring(0, notation);
-            int[] numbers = StringIntConvert(numberString, usedAlphabet);
-            return DoneNumber(numbers, notation);
+            return StringIntConvert(numberString, usedAlphabet, notation);
         }
         #endregion
 
-        #region private API        
+        #region private methods        
         /// <summary>
         /// Works with a ready array of numbers
         /// </summary>
         /// <param name="numbers"> The ready array </param>
         /// <param name="notation"> The notation </param>
         /// <returns> A ready number </returns>
-        private static int DoneNumber(int[] numbers, int notation)
+        private static int DoneNumber(ref int power, int numberString, int notation)
         {
-            int number = 0;
-            int power = (int)Math.Pow(notation, numbers.Length - 1);
-            for (int i = 0; i < numbers.Length; i++)
-            {
-                checked
-                {
-                    number += numbers[i] * power;
-                }
-                
-                power /= notation;
-            }
-
-            return number;
+            int doneNumber = 0;
+            doneNumber += numberString * power;
+            power /= notation;
+            return doneNumber;
         }
 
         /// <summary>
@@ -56,22 +46,26 @@ namespace ToDecimal
         /// <param name="numberString"> Elementary string </param>
         /// <param name="notation"> The notation </param>
         /// <returns> Int array </returns>
-        private static int[] StringIntConvert(string numberString, string usedAlphabet)
+        private static int StringIntConvert(string numberString, string usedAlphabet, int notation)
         {
             if (usedAlphabet.Length > 10)
             {
-                int[] numbers = StringIntConvertMoreDecimal(numberString, usedAlphabet);
-                return numbers;
+                return StringIntConvertMoreDecimal(numberString, usedAlphabet, notation); ;
             }
             else
             {
-                int[] numbers = new int[numberString.Length];
-                for (int i = 0; i < numbers.Length; i++)
+                int doneNumber = 0;
+                int power = (int)Math.Pow(notation, numberString.Length - 1);
+                for (int i = 0; i < numberString.Length; i++)
                 {
-                    numbers[i] = numberString[i] - 48;
+                    checked
+                    {
+                        doneNumber += DoneNumber(ref power, numberString[i] - 48, notation);
+                    }
+
                 }
 
-                return numbers;
+                return doneNumber;
             }
         }
 
@@ -80,22 +74,29 @@ namespace ToDecimal
         /// </summary>
         /// <param name="numberString"> Elementary string </param>
         /// <returns> Int array </returns>
-        private static int[] StringIntConvertMoreDecimal(string numberString, string usedAlphabet)
+        private static int StringIntConvertMoreDecimal(string numberString, string usedAlphabet, int notation)
         {
-            int[] numbers = new int[numberString.Length];
-            for (int i = 0; i < numbers.Length; i++)
+            int doneNumber = 0;
+            int power = (int)Math.Pow(notation, numberString.Length - 1);
+            for (int i = 0; i < numberString.Length; i++)
             {
                 if (numberString[i] < 58)
                 {
-                    numbers[i] = numberString[i] - 48;
+                    checked
+                    {
+                        doneNumber += DoneNumber(ref power, numberString[i] - 48, notation);
+                    }
                 }
                 else
                 {
-                    numbers[i] = usedAlphabet.IndexOf(numberString[i]);
+                    checked
+                    {
+                        doneNumber += DoneNumber(ref power, usedAlphabet.IndexOf(numberString[i]), notation);
+                    }
                 }
             }
 
-            return numbers;
+            return doneNumber;
         }
 
         /// <summary>
@@ -133,7 +134,7 @@ namespace ToDecimal
                     }
                 }
 
-                if (count!=i)
+                if (count != i)
                 {
                     throw new ArgumentException($"number {numberString[i]} can't contain in the {notation} number system");
                 }

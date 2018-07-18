@@ -7,8 +7,17 @@ using System.Threading.Tasks;
 
 namespace Converter
 {
+    /// <summary>
+    /// Converter double number to binary
+    /// </summary>
     public static class DoubleToBinary
     {
+        #region public API
+        /// <summary>
+        /// Doubles to binary converter
+        /// </summary>
+        /// <param name="number">The number.</param>
+        /// <returns> Binary number </returns>
         public static string DoubleToBinaryString(this double number)
         {
             DoubleToLong value = new DoubleToLong { Double64bits = number };
@@ -16,7 +25,8 @@ namespace Converter
             // Можно хоть в строку конвертировать?)
             return String.Concat(Converter(value));
         }
-
+        #endregion
+        #region private methods
         private static byte[] Converter(DoubleToLong value)
         {
             byte[] doneNumber = new byte[64];
@@ -36,7 +46,8 @@ namespace Converter
             }
             return doneNumber;
         }
-
+        #endregion
+        #region Struct
         [StructLayout(LayoutKind.Explicit)]
         private struct DoubleToLong
         {
@@ -51,7 +62,7 @@ namespace Converter
                 get { return double64bits; }
                 set { double64bits = value; }
             }
-
         }
+        #endregion
     }
 }
