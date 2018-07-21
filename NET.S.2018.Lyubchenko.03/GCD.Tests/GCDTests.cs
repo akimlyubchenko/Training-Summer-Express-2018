@@ -274,7 +274,37 @@ namespace GCD.Tests
             (int actual, TimeSpan time) = GCD.GetGCDWidthTime(v1, v2, v3);
             Debug.WriteLine($"Time: {time.Seconds}:{time.Ticks}");
 
-            Assert.AreEqual(expected,actual);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void GetGCDDelegate_16And5_1()
+        {
+            // Arr
+            int v1 = 20, v2 = 5;
+            int expected = 5;
+
+            // Act
+            Func<int, int, int> GCDDelegate = new Func<int, int, int>(GCD.GetGCD);
+            int actual = GCDDelegate.Invoke(v1, v2); ;
+
+            // Assert
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void GetSteinGCDDelegate_16And5_1()
+        {
+            // Arr
+            int v1 = 20, v2 = 5;
+            int expected = 5;
+
+            // Act
+            Func<int, int, int> GCDDelegate = new Func<int, int, int>(GCD.GetSteinGCD);
+            int actual = GCDDelegate.Invoke(v1, v2); ;
+
+            // Assert
+            Assert.AreEqual(expected, actual);
         }
     }
 }

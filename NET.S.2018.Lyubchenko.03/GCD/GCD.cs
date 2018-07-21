@@ -10,6 +10,16 @@ namespace GCD
     {
         #region public API
         /// <summary>
+        /// Solution for 2 numbers width delegate
+        /// </summary>
+        /// <param name="firstNumber">The first number.</param>
+        /// <param name="secondNumber">The second number.</param>
+        /// <param name="GCDDelegate">The GCD delegate.</param>
+        /// <returns> GCD </returns>
+        public static int GCDDelegate(int firstNumber, int secondNumber, Func<int, int, int> GCDDelegate)
+            => GCDDelegate.Invoke(firstNumber, secondNumber);
+
+        /// <summary>
         /// Starts the search GCD(Euclidean algorithm)
         /// </summary>
         /// <param name="numbers"> Used numbers </param>
@@ -17,10 +27,10 @@ namespace GCD
         public static int GetGCD(params int[] numbers)
         {
             IsValid(numbers);
-            int gcd = GCDSorter(numbers);
+            int gcd = GCDRunner(numbers);
             return gcd;
         }
-        
+
         /// <summary>
         /// Starts the search GCD(Euclidean algorithm)
         /// </summary>
@@ -31,7 +41,7 @@ namespace GCD
             Stopwatch stopTime = Stopwatch.StartNew();
             stopTime.Start();
             IsValid(numbers);
-            int gcd = GCDSorter(numbers);
+            int gcd = GCDRunner(numbers);
             stopTime.Stop();
             TimeSpan resultTime = stopTime.Elapsed;
             return (gcd, resultTime);
@@ -42,34 +52,9 @@ namespace GCD
         /// </summary>
         /// <param name="firstNumber"> First number </param>
         /// <param name="secondNumber"></param>
-        /// <returns> GCD </returns>
+        /// <returns></returns>
         public static int GetGCD(int firstNumber, int secondNumber)
-        {
-            if (value1 < 0)
-            {
-                value1 *= -1;
-            }
-
-            if (value2 < 0)
-            {
-                value2 *= -1;
-            }
-            int answer = -1;
-            if (value1 > value2)
-            {
-                answer = GCDCalculator(value1, value2);
-            }
-            else if (value2 > value1)
-            {
-                answer = GCDCalculator(value2, value1);
-            }
-            else if (value1 == value2)
-            {
-                answer = value1;
-            }
-
-            return answer;
-        }
+            => GetGCDTwoNumbers(firstNumber, secondNumber);
 
         /// <summary>
         /// Starts the search GCD for 3 numbers(Euclidean algorithm)
@@ -105,9 +90,18 @@ namespace GCD
 
             return gcd;
         }
+
+        /// <summary>
+        /// Solution for 2 numbers width delegate(Stein)
+        /// </summary>
+        /// <param name="firstNumber">The first number.</param>
+        /// <param name="secondNumber">The second number.</param>
+        /// <returns> GCD </returns>
+        public static int GetSteinGCD(int firstNumber, int secondNumber)
+            => SteinGCD(firstNumber, secondNumber);
         #endregion
-        #region private API
-        private static int GCDSorter(int[] numbers)
+        #region private methods
+        private static int GCDRunner(int[] numbers)
         {
             int gcd = GetGCDTwoNumbers(numbers[0], numbers[1]);
             for (int i = 2; i < numbers.Length; i++)
@@ -120,6 +114,40 @@ namespace GCD
             }
 
             return gcd;
+        }
+
+        /// <summary>
+        /// Particular cases and order of numbers
+        /// </summary>
+        /// <param name="value1"> First number </param>
+        /// <param name="value2"> Second number </param>
+        /// <returns> GCD </returns>
+        private static int GetGCDTwoNumbers(int value1, int value2)
+        {
+            if (value1 < 0)
+            {
+                value1 *= -1;
+            }
+
+            if (value2 < 0)
+            {
+                value2 *= -1;
+            }
+            int answer = -1;
+            if (value1 > value2)
+            {
+                answer = GCDCalculator(value1, value2);
+            }
+            else if (value2 > value1)
+            {
+                answer = GCDCalculator(value2, value1);
+            }
+            else if (value1 == value2)
+            {
+                answer = value1;
+            }
+
+            return answer;
         }
 
         /// <summary>
