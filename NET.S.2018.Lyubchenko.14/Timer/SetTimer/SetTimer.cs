@@ -12,8 +12,7 @@ namespace SetTimer
     /// </summary>
     public class SetTimer
     {
-        public delegate void DoSmth();
-        public event DoSmth OnAct;
+        public event Action OnAct;
 
         /// <summary>
         /// Starts the timer.
