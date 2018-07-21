@@ -12,16 +12,21 @@ namespace SetTimer
     /// </summary>
     public class SetTimer
     {
-        public event Action OnAct;
+        /// <summary>
+        /// The event
+        /// </summary>
+        public EventHandler<SmthEvent.SmthEvent> ActualEvent;
 
         /// <summary>
-        /// Starts the timer.
+        /// Simulates the subject.
         /// </summary>
-        /// <param name="time">The time</param>
-        public void StartTimer(int time)
-        {
-            Thread.Sleep(time);
-            OnAct();
-        }
+        /// <param name="message">The message.</param>
+        public void SimulateSubj(string message)
+     => OnEvent(this, new SmthEvent.SmthEvent(message));
+
+        private void OnEvent(object subscriber, SmthEvent.SmthEvent smth)
+            => ActualEvent?.Invoke(subscriber, smth);
+
+ 
     }
 }

@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static Subscribers.Subscriber1;
 
 namespace Timer
 {
@@ -11,12 +6,18 @@ namespace Timer
     {
         static void Main(string[] args)
         {
-            SetTimer.SetTimer time = new SetTimer.SetTimer();
-            Subscribers.Subscriber1 firstSub = new Subscribers.Subscriber1();
-            Subscribers.Subscriber2 secondSub = new Subscribers.Subscriber2();
-            time.OnAct += firstSub.Message;
-            time.OnAct += secondSub.Message;
-            time.StartTimer(1000);
+            SetTimer.SetTimer manager = new SetTimer.SetTimer();
+            Subscribers.Subscriber1 firstSub = new Subscribers.Subscriber1(1000);
+            Subscribers.Subscriber2 secondSub = new Subscribers.Subscriber2(1500);
+            firstSub.Register(manager);
+            secondSub.Register(manager);
+            manager.SimulateSubj("First event start");
+            secondSub.UnRegister(manager);
+            manager.SimulateSubj("Second even start");
+            secondSub = new Subscribers.Subscriber2(500);
+            secondSub.Register(manager);
+            firstSub.UnRegister(manager);
+            manager.SimulateSubj("Third even start");
 
             Console.ReadKey();
         }
