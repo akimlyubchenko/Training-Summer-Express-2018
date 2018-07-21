@@ -7,11 +7,18 @@ using System.Threading.Tasks;
 
 namespace SetTimer
 {
+    /// <summary>
+    /// Set time
+    /// </summary>
     public class SetTimer
     {
         public delegate void DoSmth();
         public event DoSmth OnAct;
 
+        /// <summary>
+        /// Starts the timer.
+        /// </summary>
+        /// <param name="time">The time</param>
         public void StartTimer(int time)
         {
             Thread.Sleep(time);
