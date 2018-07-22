@@ -1,3 +1,5 @@
+##### В связи с использованием git в Visual Studio и git bash, файлы поперемешивались. Переходите в папки через ссылки в readme)
+
 ### [BubbleJaggedSort](https://github.com/akimlyubchenko/Training-Summer-Express-2018/tree/master/NET.S.2018.Lyubchenko.09/BubbleJaggedSort)
 
 Реализовать метод "пузырьковой" сортировки непрямоугольного ("jagged" array) целочисленного массива (не использовать методы класса System.Array!) таким образом, чтобы была возможность, в частности, упорядочить строки матрицы:
