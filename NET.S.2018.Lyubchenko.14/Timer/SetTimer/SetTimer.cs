@@ -26,7 +26,5 @@ namespace SetTimer
 
         private void OnEvent(object subscriber, SmthEvent.SmthEvent smth)
             => ActualEvent?.Invoke(subscriber, smth);
-
- 
     }
 }

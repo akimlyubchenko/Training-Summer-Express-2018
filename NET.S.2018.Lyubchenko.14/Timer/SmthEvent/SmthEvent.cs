@@ -9,9 +9,7 @@ namespace SmthEvent
         /// </summary>
         /// <param name="message">The message.</param>
         public SmthEvent(string message)
-        {
-            Message = message;
-        }
+            => Message = message;
 
         public string Message { get; private set; }
     }
