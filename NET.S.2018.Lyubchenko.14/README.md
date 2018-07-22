@@ -5,3 +5,7 @@
 ### [BinarySearcher](https://github.com/akimlyubchenko/Training-Summer-Express-2018/tree/master/NET.S.2018.Lyubchenko.14/BinarySearcher)
 
 > Реализовать обобщенный алгоритм бинарного поиска. Разработать unit-тесты.
+
+### [Fibonacci](https://github.com/akimlyubchenko/Training-Summer-Express-2018/tree/master/NET.S.2018.Lyubchenko.14/Fibonacci)
+
+> Реализовать метод-генератор последовательности чисел Фибоначчи. Разработать unit-тесты.

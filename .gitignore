@@ -6,6 +6,11 @@
 *.user
 *.userosscache
 *.sln.docstates
+*.csproj
+*AssemblyInfo.cs
+*.config
+*Properties
+
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
@@ -315,3 +320,4 @@ __pycache__/
 /NET.S.2018.Lyubchenko.14/BinarySearcher/BinarySearcher/Properties/AssemblyInfo.cs
 /NET.S.2018.Lyubchenko.14/BinarySearcher/BinarySearcher/Properties
 /NET.S.2018.Lyubchenko.14/BinarySearcher/BinarySearcher/BinarySearcher.csproj
+/NET.S.2018.Lyubchenko.14/Fibonacci/Fibonacci.sln
