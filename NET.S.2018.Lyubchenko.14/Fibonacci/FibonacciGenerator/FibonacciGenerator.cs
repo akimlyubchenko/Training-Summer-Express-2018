@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Numerics;
 
 namespace FibonacciGenereator
 {
@@ -13,22 +15,26 @@ namespace FibonacciGenereator
         /// <param name="size">The size of array</param>
         /// <returns>Array width Fibonacci numbers</returns>
         /// <exception cref="System.ArgumentException"></exception>
-        public static int[] GeneratorFibonacci(int size)
+        public static IEnumerable<BigInteger> GeneratorFibonacci(int size)
         {
             if (size < 1)
             {
                 throw new ArgumentException($"Write size > 0");
             }
 
-            int[] fib = new int[size];
-            int value = 1;
-            fib[0] = value;
-            for (int i = 1; i < size; i++)
+            return GeneratorFibonacciWithoutValidation(size);
+        }
+
+        private static IEnumerable<BigInteger> GeneratorFibonacciWithoutValidation(int size)
+        {
+            BigInteger value1 = 1, value2 = 0, temp = 0;
+            for (int i = 0; i < size; i++)
             {
-                fib[i] = value;
-                value += fib[i - 1];
+                yield return value1;
+                temp = value1;
+                value1 += value2;
+                value2 = temp;
             }
-            return fib;
         }
     }
 }

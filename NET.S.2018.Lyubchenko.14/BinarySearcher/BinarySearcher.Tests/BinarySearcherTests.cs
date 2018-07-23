@@ -7,7 +7,7 @@ namespace BinarySearcher.Tests
     [TestClass]
     public class BinarySearcherTests
     {
-        Comparison<int> compar = (a, b) =>
+        readonly Comparison<int> compar = (a, b) =>
         {
             if (a - b > 0)
             {

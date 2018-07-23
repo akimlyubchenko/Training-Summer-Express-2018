@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Numerics;
 using FibonacciGenereator;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -10,33 +12,41 @@ namespace Fibonacci.Tests
         [TestMethod]
         public void GeneratorFibonacci_3_DoneArray()
         {
-            int size = 3;
-            int[] expected = new int[] { 1, 1, 2 };
+            List<BigInteger> actual = new List<BigInteger>();
+            foreach (BigInteger el in FibonacciGenerator.GeneratorFibonacci(3))
+            {
+                actual.Add(el);
+            }
 
-            int[] actual = FibonacciGenerator.GeneratorFibonacci(size);
-
+            List<BigInteger> expected = new List<BigInteger>() { new BigInteger(1), new BigInteger(1), new BigInteger(2) };
             CollectionAssert.AreEqual(expected, actual);
         }
 
         [TestMethod]
         public void GeneratorFibonacci_7_DoneArray()
         {
-            int size = 7;
-            int[] expected = new int[] { 1, 1, 2, 3, 5, 8, 13 };
+            List<BigInteger> actual = new List<BigInteger>();
+            foreach (BigInteger el in FibonacciGenerator.GeneratorFibonacci(7))
+            {
+                actual.Add(el);
+            }
 
-            int[] actual = FibonacciGenerator.GeneratorFibonacci(size);
-
+            List<BigInteger> expected = new List<BigInteger>() { new BigInteger(1), new BigInteger(1),
+                new BigInteger(2), new BigInteger(3), new BigInteger(5), new BigInteger(8), new BigInteger(13) };
             CollectionAssert.AreEqual(expected, actual);
         }
 
         [TestMethod]
-        public void GeneratorFibonacci_11_DoneArray()
+        public void GeneratorFibonacci_9_DoneArray()
         {
-            int size = 11;
-            int[] expected = new int[] { 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89 };
+            List<BigInteger> actual = new List<BigInteger>();
+            foreach (BigInteger el in FibonacciGenerator.GeneratorFibonacci(9))
+            {
+                actual.Add(el);
+            }
 
-            int[] actual = FibonacciGenerator.GeneratorFibonacci(size);
-
+            List<BigInteger> expected = new List<BigInteger>() { new BigInteger(1), new BigInteger(1), new BigInteger(2), new BigInteger(3),
+                new BigInteger(5), new BigInteger(8),new BigInteger(13), new BigInteger(21), new BigInteger(34) };
             CollectionAssert.AreEqual(expected, actual);
         }
 
