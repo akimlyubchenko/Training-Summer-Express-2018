@@ -10,6 +10,7 @@
 *AssemblyInfo.cs
 *.config
 *Properties
+*.sln
 
 
 # User-specific files (MonoDevelop/Xamarin Studio)
