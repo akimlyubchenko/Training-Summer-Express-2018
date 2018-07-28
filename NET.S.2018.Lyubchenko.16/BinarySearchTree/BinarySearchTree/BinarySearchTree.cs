@@ -1,27 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BinarySearchTree
 {
-    public class BinarySearchTree<T> : IBinarySearchTree<T>
+    /// <summary>
+    /// Binary Search Tree
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public class BinarySearchTree<T>
     {
-        private readonly IComparer<T> comparer;
+        private readonly IComparer<T> comparer = Comparer<T>.Default;
         public Node<T> Head;
 
-        #region public API
-        public BinarySearchTree()
-            => comparer = Comparer<T>.Default;
+        #region public API        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BinarySearchTree{T}"/> class.
+        /// </summary>
+        public BinarySearchTree() { }
 
-        public BinarySearchTree(IEnumerable<T> elements, IComparer<T> comp = null)
+        /// <summary>
+        /// Initializes a new instance width array of the <see cref="BinarySearchTree{T}"/> class.
+        /// </summary>
+        /// <param name="elements">The elements.</param>
+        public BinarySearchTree(IEnumerable<T> elements)
         {
-            if (comp == null)
-            {
-                comparer = Comparer<T>.Default;
-            }
-
             if (elements == null)
             {
                 Head = null;
@@ -34,6 +36,11 @@ namespace BinarySearchTree
             }
         }
 
+        /// <summary>
+        /// Adds the specified el.
+        /// </summary>
+        /// <param name="el">The el.</param>
+        /// <exception cref="System.ArgumentNullException"></exception>
         public void Add(T el)
         {
             if (el == null)
@@ -50,6 +57,11 @@ namespace BinarySearchTree
             FindPlace(Head, el);
         }
 
+        /// <summary>
+        /// PreOrder sort
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="System.ArgumentException">Fill tree</exception>
         public IEnumerable<T> PreOrder()
         {
             if (Head == null)
@@ -60,22 +72,99 @@ namespace BinarySearchTree
             return PreOrder(Head);
         }
 
-        public IEnumerable<T> PreOrder(Node<T> head)
+        /// <summary>
+        /// InOrder sort
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="System.ArgumentException">Fill tree</exception>
+        public IEnumerable<T> InOrder()
         {
-            yield return head.Current;
-            foreach (var el in PreOrder(head.Prev))
+            if (Head == null)
             {
-                yield return el;
+                throw new ArgumentException("Fill tree");
             }
 
-            foreach (var el in PreOrder(head.Next))
+            return InOrder(Head);
+        }
+
+        /// <summary>
+        /// PostsOrder sort
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="System.ArgumentException">Fill tree</exception>
+        public IEnumerable<T> PostOrder()
+        {
+            if (Head == null)
             {
-                yield return el;
+                throw new ArgumentException("Fill tree");
             }
 
+            return PostOrder(Head);
         }
         #endregion
         #region private methods
+        private IEnumerable<T> PreOrder(Node<T> head)
+        {
+            yield return head.Current;
+            if (head.Prev != null)
+            {
+                foreach (var el in PreOrder(head.Prev))
+                {
+                    yield return el;
+                }
+            }
+
+            if (head.Next != null)
+            {
+                foreach (var el in PreOrder(head.Next))
+                {
+                    yield return el;
+                }
+            }
+        }
+
+        private IEnumerable<T> InOrder(Node<T> head)
+        {
+            if (head.Prev != null)
+            {
+                foreach (var el in InOrder(head.Prev))
+                {
+                    yield return el;
+                }
+            }
+
+            yield return head.Current;
+
+            if (head.Next != null)
+            {
+                foreach (var el in InOrder(head.Next))
+                {
+                    yield return el;
+                }
+            }
+        }
+
+        private IEnumerable<T> PostOrder(Node<T> head)
+        {
+            if (head.Prev != null)
+            {
+                foreach (var el in PostOrder(head.Prev))
+                {
+                    yield return el;
+                }
+            }
+
+            if (head.Next != null)
+            {
+                foreach (var el in PostOrder(head.Next))
+                {
+                    yield return el;
+                }
+            }
+
+            yield return head.Current;
+        }
+
         private void FindPlace(Node<T> head, T el)
         {
             if (comparer.Compare(head.Current, el) > 0)
