@@ -24,7 +24,7 @@ namespace BaseMatrix.SquareMatrix
         /// Ifs the square matrix => true
         /// </summary>
         /// <param name="matrix">The matrix.</param>
-        /// <returns></returns>
+        /// <returns>true or false </returns>
         public static bool IfSquareMatrix(T[][] matrix)
         {
             if (matrix.Length != matrix[0].Length)

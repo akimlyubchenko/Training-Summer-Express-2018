@@ -85,7 +85,7 @@ namespace BaseMatrix
         /// </summary>
         /// <param name="lhs">The LHS.</param>
         /// <param name="rhs">The RHS.</param>
-        /// <returns>true or false </returns>
+        /// <returns>True or false</returns>
         public static bool MatrixComparer(BaseMatrix<T> lhs, BaseMatrix<T> rhs)
         {
             for (int i = 0; i < lhs.matrix.Length; i++)

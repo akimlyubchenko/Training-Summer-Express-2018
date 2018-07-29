@@ -24,7 +24,7 @@ namespace BaseMatrix.DiagonalMatrix
         /// Ifs the diagonal matrix => true
         /// </summary>
         /// <param name="matrix">The matrix.</param>
-        /// <returns></returns>
+        /// <returns>true or false</returns>
         public static bool IfDiagonalMatrix(T[][] matrix)
         {
             for (int i = 0; i < matrix.Length; i++)

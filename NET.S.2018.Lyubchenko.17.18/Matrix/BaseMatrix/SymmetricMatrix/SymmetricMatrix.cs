@@ -24,7 +24,7 @@ namespace BaseMatrix.SymmetricMatrix
         /// Ifs the symmetric matrix => true
         /// </summary>
         /// <param name="matrix">The matrix.</param>
-        /// <returns></returns>
+        /// <returns>true or false</returns>
         public static bool IfSymmetricMatrix(T[][] matrix)
         {
             for (int i = 1; i < matrix.Length; i++)
