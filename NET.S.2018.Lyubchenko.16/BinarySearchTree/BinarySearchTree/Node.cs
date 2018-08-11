@@ -29,6 +29,11 @@ namespace BinarySearchTree
             Prev = null;
         }
 
+        /// <summary>
+        /// Removes the specified head.
+        /// </summary>
+        /// <param name="Head">Specifical algoritm, never mind, its work)</param>
+        /// <returns>true if Remove have success</returns>
         public bool Remove(ref Node<T> Head)
         {
             if (Parent == null)

@@ -9,11 +9,11 @@ namespace BinarySearchTree
     /// <typeparam name="T"></typeparam>
     public class BinarySearchTree<T>
     {
+        #region Fields
         private readonly IComparer<T> comparer = Comparer<T>.Default;
         private Node<T> Head;
-        public int Count { get; private set; }
-
-        #region public API        
+        #endregion
+        #region Constructors      
         /// <summary>
         /// Initializes a new instance of the <see cref="BinarySearchTree{T}"/> class.
         /// </summary>
@@ -36,6 +36,15 @@ namespace BinarySearchTree
                 Add(el);
             }
         }
+        #endregion
+        #region public API  
+        /// <summary>
+        /// Gets the count.
+        /// </summary>
+        /// <value>
+        /// The count.
+        /// </value>
+        public int Count { get; private set; }
 
         /// <summary>
         /// Adds the specified el.
@@ -136,6 +145,24 @@ namespace BinarySearchTree
         /// <returns>
         ///   <c>true</c> if [contains] [the specified head]; otherwise, <c>false</c>.
         /// </returns>
+
+        public IEnumerable<T> ShowTree()
+        {
+            if (Head == null)
+            {
+                return new T[] { };
+            }
+
+            return InOrder(Head);
+        }
+
+        /// <summary>
+        /// Determines whether [contains] [the specified el].
+        /// </summary>
+        /// <param name="el">The el.</param>
+        /// <returns>
+        ///   <c>true</c> if [contains] [the specified el]; otherwise, <c>false</c>.
+        /// </returns>
         public bool Contains(T el)
             => Contains(Head, el);
         #endregion
@@ -209,6 +236,7 @@ namespace BinarySearchTree
                 if (head.Prev == null)
                 {
                     head.Prev = new Node<T>(el, head);
+                    return true;
                 }
 
                 return FindPlace(head.Prev, el);
@@ -218,6 +246,7 @@ namespace BinarySearchTree
                 if (head.Next == null)
                 {
                     head.Next = new Node<T>(el, head);
+                    return true;
                 }
 
                 return FindPlace(head.Next, el);
@@ -265,7 +294,7 @@ namespace BinarySearchTree
                     return false;
                 }
 
-                return FindPlace(head.Prev, el);
+                return Contains(head.Prev, el);
             }
             else if (comparer.Compare(head.Current, el) < 0)
             {
@@ -274,7 +303,7 @@ namespace BinarySearchTree
                     return false;
                 }
 
-                return FindPlace(head.Next, el);
+                return Contains(head.Next, el);
             }
 
             return true;
