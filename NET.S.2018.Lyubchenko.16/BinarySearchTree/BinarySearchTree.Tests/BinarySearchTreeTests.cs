@@ -65,6 +65,24 @@ namespace BinarySearchTree.Tests
         }
 
         [Test]
+        public void BinarySearchTreePreIntRemove()
+        {
+            BinarySearchTree<int> actual = new BinarySearchTree<int>(new int[] { 5 });
+            int[] arr = new int[] { 3, 1, 7, 9 };
+            for (int i = 0; i < arr.Length; i++)
+            {
+                actual.Add(arr[i]);
+            }
+
+            actual.Add(2);
+            actual.Add(8);
+            actual.Remove(3);
+            IEnumerable<int> expected = new int[] { 5, 1, 2, 7, 9, 8 };
+
+            CollectionAssert.AreEqual(expected, actual.PreOrder());
+        }
+
+        [Test]
         public void BinarySearchTreePreString()
         {
             BinarySearchTree<string> actual = new BinarySearchTree<string>();

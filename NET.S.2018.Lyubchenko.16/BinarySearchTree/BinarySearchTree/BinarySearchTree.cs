@@ -10,7 +10,8 @@ namespace BinarySearchTree
     public class BinarySearchTree<T>
     {
         private readonly IComparer<T> comparer = Comparer<T>.Default;
-        public Node<T> Head;
+        private Node<T> Head;
+        public int Count { get; private set; }
 
         #region public API        
         /// <summary>
@@ -41,7 +42,7 @@ namespace BinarySearchTree
         /// </summary>
         /// <param name="el">The el.</param>
         /// <exception cref="System.ArgumentNullException"></exception>
-        public void Add(T el)
+        public bool Add(T el)
         {
             if (el == null)
             {
@@ -51,10 +52,35 @@ namespace BinarySearchTree
             if (Head == null)
             {
                 Head = new Node<T>(el);
-                return;
+                return true;
             }
 
-            FindPlace(Head, el);
+            if (FindPlace(Head, el))
+            {
+                Count++;
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool Remove(T el)
+        {
+            if (el == null)
+            {
+                return false;
+            }
+            if (Head == null)
+            {
+                return false;
+            }
+
+            if (FindElToRemove(Head, el))
+            {
+                Count--;
+                return true;
+            }
+            return false;
         }
 
         /// <summary>
@@ -101,6 +127,17 @@ namespace BinarySearchTree
 
             return PostOrder(Head);
         }
+
+        /// <summary>
+        /// Determines whether [contains] [the specified head].
+        /// </summary>
+        /// <param name="head">The head.</param>
+        /// <param name="el">The el.</param>
+        /// <returns>
+        ///   <c>true</c> if [contains] [the specified head]; otherwise, <c>false</c>.
+        /// </returns>
+        public bool Contains(T el)
+            => Contains(Head, el);
         #endregion
         #region private methods
         private IEnumerable<T> PreOrder(Node<T> head)
@@ -165,26 +202,82 @@ namespace BinarySearchTree
             yield return head.Current;
         }
 
-        private void FindPlace(Node<T> head, T el)
+        private bool FindPlace(Node<T> head, T el)
         {
             if (comparer.Compare(head.Current, el) > 0)
             {
                 if (head.Prev == null)
                 {
-                    head.Prev = new Node<T>(el);
+                    head.Prev = new Node<T>(el, head);
                 }
 
-                FindPlace(head.Prev, el);
+                return FindPlace(head.Prev, el);
             }
             else if (comparer.Compare(head.Current, el) < 0)
             {
                 if (head.Next == null)
                 {
-                    head.Next = new Node<T>(el);
+                    head.Next = new Node<T>(el, head);
                 }
 
-                FindPlace(head.Next, el);
+                return FindPlace(head.Next, el);
             }
+
+            return false;
+        }
+
+        private bool FindElToRemove(Node<T> head, T el)
+        {
+            if (comparer.Compare(head.Current, el) > 0)
+            {
+                if (head.Prev == null)
+                {
+                    return false;
+                }
+
+                return FindElToRemove(head.Prev, el);
+            }
+            else if (comparer.Compare(head.Current, el) < 0)
+            {
+                if (head.Next == null)
+                {
+                    return false;
+                }
+
+                return FindElToRemove(head.Next, el);
+            }
+
+            if (head.Remove(ref Head))
+            {
+                Count--;
+                return true;
+            }
+            
+            return false;
+        }
+
+        private bool Contains(Node<T> head, T el)
+        {
+            if (comparer.Compare(head.Current, el) > 0)
+            {
+                if (head.Prev == null)
+                {
+                    return false;
+                }
+
+                return FindPlace(head.Prev, el);
+            }
+            else if (comparer.Compare(head.Current, el) < 0)
+            {
+                if (head.Next == null)
+                {
+                    return false;
+                }
+
+                return FindPlace(head.Next, el);
+            }
+
+            return true;
         }
         #endregion
     }
